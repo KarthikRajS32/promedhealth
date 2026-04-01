@@ -14,23 +14,23 @@ export function ServiceCard({ service, className }: ServiceCardProps) {
     <Link
       to={`/services/${service.id}`}
       className={cn(
-        "group flex flex-col gap-5 p-7 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-brand-secondary/30 hover:-translate-y-1 transition-all duration-300",
+        "group flex flex-col gap-4 p-6 bg-white border border-slate-100 hover:border-brand-secondary/40 hover:shadow-md hover:-translate-y-1 transition-all duration-300",
         className
       )}
     >
-      <div className="w-12 h-12 rounded-xl bg-brand-accent flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition-all duration-300">
-        <Icon size={22} strokeWidth={1.8} />
+      <div className="w-10 h-10 bg-brand-accent flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition-all duration-300">
+        <Icon size={18} strokeWidth={1.8} />
       </div>
-      <div className="space-y-2 flex-1">
-        <h3 className="text-base font-bold text-brand-primary group-hover:text-brand-secondary transition-colors">
+      <div className="space-y-1.5 flex-1">
+        <h3 className="text-sm font-semibold text-brand-primary group-hover:text-brand-secondary transition-colors font-sans">
           {service.title}
         </h3>
-        <p className="text-sm text-slate-500 leading-relaxed">
+        <p className="text-xs text-slate-400 leading-relaxed">
           {service.shortDescription}
         </p>
       </div>
-      <div className="flex items-center gap-2 text-brand-secondary text-sm font-semibold">
-        Learn more <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+      <div className="flex items-center gap-1.5 text-brand-secondary text-xs font-medium">
+        Learn more <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
       </div>
     </Link>
   );

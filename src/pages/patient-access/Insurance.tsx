@@ -1,156 +1,123 @@
 import { motion } from 'framer-motion';
+import { SectionBanner } from '../../components/ui/SectionBanner';
 import { clinicInfo } from '../../data/content';
-import { Check, Shield, AlertCircle, Phone, ArrowUpRight, Plus, Heart } from 'lucide-react';
-import { Button } from '../../components/ui/Button';
-import aetnaLogo from '../../assets/atena-1.png';
-import texasHealthLogo from '../../assets/texax-helath.png';
-import bcbsLogo from '../../assets/bcbs.png';
-import uhcLogo from '../../assets/UHC2.png';
-import cignaLogo from '../../assets/Cigna.png';
-import medicareLogo from '../../assets/Medicare.png';
-import humanaLogo from '../../assets/Humana.png';
-import firstHealthLogo from '../../assets/first-health.png';
-import selfPayLogo from '../../assets/self-pay.png';
+import { CheckCircle, AlertCircle, Phone } from 'lucide-react';
+
+const plans = [
+  { name: 'Aetna', logo: '/src/assets/atena-1.png' },
+  { name: 'Texas Health', logo: '/src/assets/texax-helath.png' },
+  { name: 'BlueCross BlueShield', logo: '/src/assets/bcbs.png' },
+  { name: 'UnitedHealthcare', logo: '/src/assets/UHC2.png' },
+  { name: 'Cigna', logo: '/src/assets/Cigna.png' },
+  { name: 'Medicare', logo: '/src/assets/Medicare.png' },
+  { name: 'Humana', logo: '/src/assets/Humana.png' },
+  { name: 'First Health', logo: '/src/assets/first-health.png' },
+  { name: 'Self-Pay', logo: '/src/assets/self-pay.png' },
+];
 
 export function Insurance() {
-  const plans = [
-    { name: 'Aetna', logo: aetnaLogo },
-    { name: 'Texas Health', logo: texasHealthLogo },
-    { name: 'BlueCross BlueShield', logo: bcbsLogo },
-    { name: 'UnitedHealthcare', logo: uhcLogo },
-    { name: 'Cigna', logo: cignaLogo },
-    { name: 'Medicare', logo: medicareLogo },
-    { name: 'Humana', logo: humanaLogo },
-    { name: 'First Health', logo: firstHealthLogo },
-    { name: 'Self-Pay', logo: selfPayLogo },
-  ];
+  const fadeUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6 }
+  };
 
   return (
-    <div className="bg-brand-surface pt-32 pb-48 selection:bg-brand-accent selection:text-white overflow-hidden">
-      
-      {/* ── COVERAGE EXPLORER HEADER ── */}
-      <section className="container-custom relative mb-32">
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none" />
-        
-        <div className="max-w-4xl space-y-12 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-brand-primary text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.3em]">
-            <Shield size={14} className="text-brand-accent" /> Network Participation
+    <div className="flex flex-col">
+      <SectionBanner
+        title="Accepted Insurance"
+        subtitle="We accept a wide range of plans to ensure our services are accessible to the Frisco community."
+        breadcrumbs={[{ name: 'Patient Access', path: '/patient-access' }, { name: 'Insurance', path: '/patient-access/insurance' }]}
+      />
+
+      {/* Plans grid */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <motion.div 
+            {...fadeUp}
+            className="text-center mb-10 space-y-2"
+          >
+            <p className="text-xs font-semibold text-brand-secondary uppercase tracking-widest">Coverage</p>
+            <h2 className="text-2xl font-bold text-brand-primary">Accepted Insurance</h2>
+            <p className="text-sm text-slate-500 max-w-lg mx-auto">We work with most major insurance carriers and Medicare plans to ensure you receive the care you need.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {plans.map((plan, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                className="bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group overflow-hidden"
+              >
+                <div className="h-1 bg-gradient-to-r from-brand-primary to-brand-secondary" />
+                <div className="flex flex-col items-center gap-3 p-5">
+                  <div className="w-40 h-20 bg-brand-light rounded-xl flex items-center justify-center border border-slate-100 group-hover:scale-105 transition-transform">
+                    <img src={plan.logo} alt={plan.name} className="h-10 w-auto object-contain" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-          
-          <h1 className="text-6xl sm:text-8xl font-black text-brand-primary tracking-tighter leading-[0.9]">
-            Coverage <br />
-            <span className="text-slate-300">& Care Coordination.</span>
-          </h1>
-          
-          <p className="text-xl text-brand-muted font-medium max-w-2xl leading-relaxed">
-            We partner with major national and regional carriers to ensure your path to wellness is seamless and financially transparent.
-          </p>
         </div>
       </section>
 
-      {/* ── PREMIUM PLAN GRID ── */}
-      <section className="container-custom">
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              whileHover={{ y: -8 }}
-              className="group relative bg-white border border-slate-100 rounded-[2.5rem] p-10 flex flex-col items-center text-center transition-all duration-500 hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] overflow-hidden"
+      {/* Medicare + Self-pay */}
+      <section className="section-padding bg-brand-light">
+        <div className="container-custom">
+          <div className="grid md:grid-cols-2 gap-5">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-brand-primary rounded-2xl p-7 text-white space-y-4"
             >
-               <div className="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-10 transition-opacity">
-                  <ArrowUpRight size={24} className="text-brand-accent" />
-               </div>
-               
-               <div className="w-full aspect-[3/2] rounded-2xl bg-slate-50 flex items-center justify-center p-8 mb-8 group-hover:bg-white transition-colors duration-500">
-                  <img src={plan.logo} alt={plan.name} className="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700" />
-               </div>
-               
-               <h3 className="text-sm font-black text-brand-primary uppercase tracking-[0.15em] mb-2">{plan.name}</h3>
-               <p className="text-[10px] font-black text-brand-muted uppercase tracking-widest">In-Network Partner</p>
+              <h3 className="text-lg font-bold">Medicare & Seniors</h3>
+              <p className="text-sm text-white/60 leading-relaxed">We specialize in internal medicine for seniors and fully coordinate with Medicare and Medicare Advantage (Part C) plans.</p>
+              <ul className="space-y-2">
+                {['Annual Wellness Visits Supported', 'Part C Coverage Coordination', 'Chronic Care Management'].map(item => (
+                  <li key={item} className="flex items-center gap-2 text-xs text-white/80">
+                    <CheckCircle size={13} className="text-brand-secondary shrink-0" /> {item}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
-          ))}
+
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-2xl p-7 border border-slate-100 shadow-sm space-y-4"
+            >
+              <h3 className="text-lg font-bold text-brand-primary">Self-Pay Options</h3>
+              <p className="text-sm text-slate-500 leading-relaxed">For patients without insurance coverage, we offer competitive self-pay rates to ensure you don't compromise on your health.</p>
+              <div className="pt-3 border-t border-slate-100">
+                <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">Request a Quote</p>
+                <a href={`tel:${clinicInfo.contact.phone}`} className="flex items-center gap-2 text-brand-primary font-bold hover:text-brand-secondary transition-colors">
+                  <Phone size={15} /> {clinicInfo.contact.phone}
+                </a>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Alert */}
+          <motion.div 
+            {...fadeUp}
+            className="mt-5 bg-white rounded-xl border border-slate-100 p-5 flex items-start gap-4"
+          >
+            <AlertCircle size={18} className="text-brand-secondary shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-semibold text-brand-primary">Verify Your Coverage</p>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed">Insurance plans and provider networks can change frequently. We strongly recommend verifying our current participation with your specific plan before your visit.</p>
+            </div>
+          </motion.div>
         </div>
       </section>
-
-      {/* ── SPECIALIZED MEDICARE MODULE ── */}
-      <section className="container-custom mt-48">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-            <div className="relative group">
-               <div className="absolute -inset-10 bg-brand-accent/5 rounded-[4rem] blur-3xl pointer-events-none" />
-               <div className="relative p-12 lg:p-20 bg-brand-primary rounded-[4rem] text-white space-y-10 overflow-hidden shadow-2xl">
-                  <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none">
-                    <Heart size={200} />
-                  </div>
-                  
-                  <div className="inline-flex items-center gap-2 text-brand-accent text-[10px] font-black uppercase tracking-[0.3em]">
-                    <Plus size={14} /> Medicare Center
-                  </div>
-                  
-                  <h2 className="text-5xl font-black leading-[0.9] tracking-tighter">
-                    Coordinated <br />
-                    <span className="text-white/30 text-4xl">Medicare Specialty.</span>
-                  </h2>
-                  
-                  <p className="text-lg text-white/50 font-medium leading-relaxed">
-                    Under the leadership of Dr. Kavitha Ilayaraja, we offer specialized internal medicine for seniors, coordinating seamlessly with Medicare and Medicare Advantage (Part C) plans.
-                  </p>
-                  
-                  <div className="space-y-4 pt-4">
-                    {['Annual Wellness Visits', 'Path C Coordination', 'Chronic Care Management'].map(item => (
-                       <div key={item} className="flex items-center gap-4 text-sm font-black uppercase tracking-widest group/item">
-                          <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover/item:bg-brand-accent group-hover/item:border-brand-accent transition-all">
-                             <Check size={14} className="text-brand-accent group-hover/item:text-white" />
-                          </div>
-                          {item}
-                       </div>
-                    ))}
-                  </div>
-               </div>
-            </div>
-
-            <div className="space-y-12">
-               <div className="p-12 bg-white border border-slate-100 rounded-[3.5rem] space-y-8 shadow-sm hover:shadow-xl transition-all duration-500">
-                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-brand-accent">
-                    <Phone size={28} />
-                  </div>
-                  <div className="space-y-4">
-                    <h3 className="text-3xl font-black text-brand-primary leading-tight">Verification <br /> Protocol.</h3>
-                    <p className="text-brand-muted font-medium leading-relaxed">
-                      Insurance networks can shift rapidly. We recommend a brief verification call to confirm our current participation with your specific plan before your visit.
-                    </p>
-                  </div>
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                     <div>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-muted mb-1">Clinic Contact</p>
-                        <p className="text-2xl font-black text-brand-primary">{clinicInfo.contact.phone}</p>
-                     </div>
-                     <a href={`tel:${clinicInfo.contact.phone}`}>
-                        <Button variant="primary" className="rounded-2xl">Call Now</Button>
-                     </a>
-                  </div>
-               </div>
-
-               <div className="p-12 bg-brand-surface border border-brand-accent/20 rounded-[3.5rem] relative overflow-hidden group hover:bg-brand-accent transition-all duration-700">
-                  <div className="relative z-10 space-y-6">
-                    <h4 className="text-2xl font-black text-brand-primary group-hover:text-white transition-colors">Self-Pay Options</h4>
-                    <p className="text-brand-muted font-medium group-hover:text-white/70 transition-colors leading-relaxed">
-                      For patients without coverage, we offer transparent, competitive self-pay rates to preserve your health without the overhead.
-                    </p>
-                    <div className="flex items-center gap-3 text-brand-accent group-hover:text-white text-xs font-black uppercase tracking-[0.2em] transition-colors">
-                      View Rates <ArrowUpRight size={16} />
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-10 -right-10 opacity-5 group-hover:opacity-20 transition-opacity">
-                    <AlertCircle size={150} />
-                  </div>
-               </div>
-            </div>
-        </div>
-      </section>
-
     </div>
   );
 }

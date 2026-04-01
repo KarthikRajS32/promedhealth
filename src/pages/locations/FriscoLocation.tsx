@@ -1,157 +1,151 @@
+import { motion } from 'framer-motion';
+import { SectionBanner } from '../../components/ui/SectionBanner';
 import { clinicInfo } from '../../data/content';
-import { MapPin, Phone, Mail, Navigation, Building2, ShieldCheck, Heart, ArrowRight, Plus, Clock } from 'lucide-react';
-import { Button } from '../../components/ui/Button';
+import { MapPin, Phone, Mail, Clock, Navigation, Building2, ShieldCheck, Heart, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function FriscoLocation() {
+  const fadeUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6 }
+  };
+
+  const slideLeft = {
+    initial: { opacity: 0, x: -50 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8 }
+  };
+
+  const slideRight = {
+    initial: { opacity: 0, x: 50 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8 }
+  };
+
   return (
-    <div className="bg-brand-surface pt-32 pb-48 selection:bg-brand-accent selection:text-white overflow-hidden">
-      
-      {/* ── LOCATION HEADER ── */}
-      <section className="container-custom relative mb-32">
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none" />
-        
-        <div className="max-w-4xl space-y-12 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-brand-primary text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.3em]">
-            <MapPin size={14} className="text-brand-accent" /> Clinical Headquarters
-          </div>
-          
-          <h1 className="text-6xl sm:text-8xl font-black text-brand-primary tracking-tighter leading-[0.9]">
-            Excellence <br />
-            <span className="text-slate-300">in Frisco.</span>
-          </h1>
-          
-          <p className="text-xl text-brand-muted font-medium max-w-2xl leading-relaxed">
-            Our flagship clinic provides a modern, comfortable environment for all your primary care needs, equipped with advanced clinical technology and led by Dr. Kavitha Ilayaraja, MD.
-          </p>
-        </div>
-      </section>
+    <div className="flex flex-col">
+      <SectionBanner
+        title="Frisco Location"
+        subtitle="Our flagship clinic providing modern, comfortable primary care in Frisco, TX."
+        breadcrumbs={[{ name: 'Locations', path: '/locations' }, { name: 'Frisco', path: '/locations/frisco' }]}
+      />
 
-      {/* ── ASYMMETRIC MAP INTERFACE ── */}
-      <section className="container-custom">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-stretch">
-          
-          {/* Main Map Visual */}
-          <div className="lg:col-span-7">
-            <div className="h-full min-h-[500px] relative rounded-[4rem] overflow-hidden bg-brand-primary group shadow-2xl">
-               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=2000')] bg-cover bg-center opacity-30 group-hover:scale-105 transition-transform duration-[10s]" />
-               <div className="absolute inset-0 bg-gradient-to-t from-brand-primary via-transparent to-transparent opacity-80" />
-               
-               <div className="absolute bottom-12 inset-x-12 space-y-6">
-                  <div className="flex items-center gap-4">
-                     <div className="w-12 h-12 bg-brand-accent rounded-xl flex items-center justify-center text-white shadow-xl">
-                        <MapPin size={24} />
-                     </div>
-                     <p className="text-xl font-bold text-white tracking-tight">
-                        {clinicInfo.contact.address.street}, {clinicInfo.contact.address.city}
-                     </p>
+      {/* Map + Info */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Map */}
+            <motion.div 
+              {...slideLeft}
+              className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm h-80 lg:h-auto"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.670356763442!2d-96.7562854!3d33.1558235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c3c393bc3075f%3A0xc6cb1c7df8b64e0!2s11691%20Independence%20Pkwy%20%23110%2C%20Frisco%2C%20TX%2075035!5e0!3m2!1sen!2sus!4v1711894000000!5m2!1sen!2sus"
+                width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+              />
+            </motion.div>
+
+            {/* Contact info */}
+            <motion.div 
+              {...slideRight}
+              className="space-y-5"
+            >
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-brand-secondary uppercase tracking-widest">Contact & Hours</p>
+                <h2 className="text-2xl font-bold text-brand-primary">ProMed Health — Frisco</h2>
+              </div>
+
+              <div className="space-y-3">
+                {[
+                  { icon: MapPin, label: 'Address', value: `${clinicInfo.contact.address.street}, Suite 110, ${clinicInfo.contact.address.city}, TX ${clinicInfo.contact.address.zip}` },
+                  { icon: Phone, label: 'Phone', value: clinicInfo.contact.phone, href: `tel:${clinicInfo.contact.phone}` },
+                  { icon: Mail, label: 'Email', value: clinicInfo.contact.email, href: `mailto:${clinicInfo.contact.email}` },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 p-4 bg-brand-light rounded-xl border border-slate-100">
+                    <div className="w-8 h-8 bg-brand-accent rounded-lg flex items-center justify-center text-brand-secondary shrink-0">
+                      <item.icon size={15} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{item.label}</p>
+                      {item.href ? (
+                        <a href={item.href} className="text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors mt-0.5 block">{item.value}</a>
+                      ) : (
+                        <p className="text-sm font-medium text-brand-primary mt-0.5">{item.value}</p>
+                      )}
+                    </div>
                   </div>
-                  <a 
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(clinicInfo.contact.address.street + " " + clinicInfo.contact.address.city)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block"
-                  >
-                    <Button size="xl" className="px-12 h-16 rounded-3xl group bg-brand-accent text-white border-transparent hover:bg-white hover:text-brand-primary transition-all">
-                      Directions <Navigation size={18} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </Button>
-                  </a>
-               </div>
-            </div>
-          </div>
+                ))}
+              </div>
 
-          {/* Contact & Hours Card */}
-          <div className="lg:col-span-5">
-            <div className="h-full p-12 lg:p-16 bg-white border border-slate-100 rounded-[4rem] space-y-12 shadow-sm hover:shadow-2xl transition-all duration-700">
-               <div className="space-y-10">
-                  <h3 className="text-sm font-black text-brand-primary uppercase tracking-[0.3em]">Communication Hub</h3>
-                  <div className="space-y-8">
-                     <div className="flex items-start gap-6 group">
-                        <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-brand-accent shrink-0 group-hover:bg-brand-accent group-hover:text-white transition-all">
-                           <Phone size={24} />
-                        </div>
-                        <div>
-                           <p className="text-[10px] font-black uppercase tracking-widest text-brand-muted mb-1">Direct Line</p>
-                           <a href={`tel:${clinicInfo.contact.phone}`} className="text-2xl font-black text-brand-primary hover:text-brand-accent transition-colors">
-                              {clinicInfo.contact.phone}
-                           </a>
-                        </div>
-                     </div>
-                     <div className="flex items-start gap-6 group">
-                        <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-brand-accent shrink-0 group-hover:bg-brand-accent group-hover:text-white transition-all">
-                           <Mail size={24} />
-                        </div>
-                        <div>
-                           <p className="text-[10px] font-black uppercase tracking-widest text-brand-muted mb-1">Health Support</p>
-                           <a href={`mailto:${clinicInfo.contact.email}`} className="text-2xl font-black text-brand-primary hover:text-brand-accent transition-colors">
-                              {clinicInfo.contact.email}
-                           </a>
-                        </div>
-                     </div>
+              {/* Hours */}
+              <div className="bg-brand-light rounded-xl border border-slate-100 p-5 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Clock size={14} className="text-brand-secondary" />
+                  <p className="text-xs font-semibold text-brand-primary uppercase tracking-widest">Office Hours</p>
+                </div>
+                {clinicInfo.contact.hours.map((h, i) => (
+                  <div key={i} className="flex justify-between items-center text-sm border-b border-slate-100 pb-2 last:border-0 last:pb-0">
+                    <span className="text-slate-500 text-xs">{h.days}</span>
+                    <span className="text-brand-primary font-semibold text-xs">{h.time}</span>
                   </div>
-               </div>
+                ))}
+              </div>
 
-               <div className="space-y-6 pt-10 border-t border-slate-50">
-                  <h3 className="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em] flex items-center gap-2">
-                     <Clock size={14} className="text-brand-accent" /> Patient Access Hours
-                  </h3>
-                  <ul className="space-y-4">
-                     {clinicInfo.contact.hours.map((hour, idx) => (
-                        <li key={idx} className="flex justify-between items-center text-sm font-bold border-b border-slate-50 pb-4">
-                           <span className="text-brand-muted">{hour.days}</span>
-                           <span className="text-brand-primary">{hour.time}</span>
-                        </li>
-                     ))}
-                  </ul>
-               </div>
-            </div>
+              <div className="flex gap-3">
+                <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(clinicInfo.contact.address.street + ' ' + clinicInfo.contact.address.city)}`}
+                  target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-brand-secondary hover:bg-[#007aab] text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
+                  <Navigation size={14} /> Get Directions
+                </a>
+                <Link to="/appointments"
+                  className="inline-flex items-center gap-2 border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
+                  <Calendar size={14} /> Book Visit
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── FACILITY HIGHLIGHT GRID ── */}
-      <section className="container-custom mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-         {[
-           { icon: Building2, title: "Modern Clinical Lab", desc: "Full diagnostic suite including bloodwork and wellness screenings." },
-           { icon: ShieldCheck, title: "Compliance Hub", desc: "Rigorous HIPAA standards ensuring your medical records remain private." },
-           { icon: Heart, title: "Patient Comfort", desc: "Designed to reduce anxiety with private suites and minimalist therapy rooms." },
-           { icon: Plus, title: "Acute Support", desc: "Dedicated fast-track rooms for same-day sickness or urgent needs." }
-         ].map((item, i) => (
-           <div key={i} className="p-10 bg-white border border-slate-100 rounded-[3rem] space-y-8 hover:bg-brand-surface hover:-translate-y-2 transition-all duration-500 group">
-              <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all shadow-sm">
-                 <item.icon size={24} />
-              </div>
-              <div className="space-y-4">
-                 <h4 className="text-xl font-black text-brand-primary tracking-tight">{item.title}</h4>
-                 <p className="text-sm text-brand-muted font-medium leading-relaxed">{item.desc}</p>
-              </div>
-           </div>
-         ))}
-      </section>
-
-      {/* ── BOLD CTA ── */}
-      <section className="container-custom mt-32 text-center space-y-12">
-          <div className="w-20 h-20 bg-brand-accent/10 rounded-[2rem] flex items-center justify-center text-brand-accent mx-auto">
-            <Navigation size={40} className="fill-brand-accent" />
+      {/* Facility highlights */}
+      <section className="section-padding bg-brand-light">
+        <div className="container-custom">
+          <motion.div 
+            {...fadeUp}
+            className="text-center mb-8 space-y-2"
+          >
+            <p className="text-xs font-semibold text-brand-secondary uppercase tracking-widest">Our Facility</p>
+            <h2 className="text-2xl font-bold text-brand-primary">What to Expect</h2>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: Building2, title: 'Modern Clinical Lab', desc: 'Full diagnostic suite including bloodwork and wellness screenings.' },
+              { icon: ShieldCheck, title: 'HIPAA Compliant', desc: 'Rigorous standards ensuring your medical records remain private.' },
+              { icon: Heart, title: 'Patient Comfort', desc: 'Designed to reduce anxiety with private, comfortable suites.' },
+              { icon: Clock, title: 'Same-Day Visits', desc: 'Dedicated fast-track for same-day sickness or urgent needs.' },
+            ].map((item, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all group space-y-3"
+              >
+                <div className="w-9 h-9 bg-brand-accent rounded-lg flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition-all">
+                  <item.icon size={16} />
+                </div>
+                <p className="text-sm font-semibold text-brand-primary">{item.title}</p>
+                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
-          <h2 className="text-6xl sm:text-7xl font-black text-brand-primary tracking-tighter leading-none">
-            Ready for a <br />
-            <span className="text-slate-300">clinical visit?</span>
-          </h2>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-             <Link to="/appointments">
-                <Button size="xl" className="px-16 h-20 rounded-3xl text-xl font-black group">
-                  Book at Frisco <ArrowRight size={24} className="ml-3 transition-transform group-hover:translate-x-1" />
-                </Button>
-             </Link>
-             <Link to="/contact">
-                <Button variant="outline" size="xl" className="px-16 h-20 rounded-3xl text-xl font-black border-slate-200 hover:bg-brand-primary hover:text-white group">
-                  Contact Support
-                </Button>
-             </Link>
-          </div>
+        </div>
       </section>
-
     </div>
   );
 }
