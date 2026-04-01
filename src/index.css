@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #005080;
+  --color-brand-secondary: #00ABC8;
+  --color-brand-accent: #E6F7F9;
+  --color-brand-light: #F8FAFC;
+  --color-brand-white: #FFFFFF;
+  
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Plus Jakarta Sans", "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-light text-slate-800 font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight text-brand-primary;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    @apply py-16 lg:py-24;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}
