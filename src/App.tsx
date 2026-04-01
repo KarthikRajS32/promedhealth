@@ -22,6 +22,8 @@ import { ServiceDetail } from './pages/services/ServiceDetail';
 import { Contact } from './pages/Contact';
 import { Appointments } from './pages/Appointments';
 import { FriscoLocation } from './pages/locations/FriscoLocation';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsAndConditions } from './pages/TermsAndConditions';
 
 function App() {
   return (
@@ -49,6 +51,8 @@ function App() {
         {/* Contact & Appointments */}
         <Route path="/contact" element={<Contact />} />
         <Route path="/appointments" element={<Appointments />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsAndConditions />} />
       </Routes>
     </Layout>
   );

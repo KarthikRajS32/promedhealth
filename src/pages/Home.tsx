@@ -31,13 +31,17 @@ export function Home() {
               </div>
               
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-white leading-tight tracking-tight">
-                Where Compassion Meets <span className="text-brand-secondary italic">Connection.</span>
+                Welcome to <span className="text-brand-secondary italic">ProMed Health</span> Primary Care
               </h1>
               
-              <p className="text-base sm:text-xl text-brand-accent/80 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
-                ProMed Health Primary Care is dedicated to providing high-quality, 
-                patient-centered medical services under the expert leadership of Dr. Kavitha Ilayaraja, MD.
-              </p>
+              <div className="space-y-4 max-w-2xl mx-auto lg:mx-0">
+                <p className="text-base sm:text-lg text-brand-accent/90 font-medium leading-relaxed">
+                  Conveniently located in Frisco, our practice is dedicated to providing exceptional healthcare services under the expert guidance of Dr. Kavitha Ilayaraja, who brings several years of experience in internal medicine and primary care specialty.
+                </p>
+                <p className="hidden sm:block text-base sm:text-lg text-brand-accent/80 font-medium leading-relaxed">
+                 At ProMed Health, we believe in fostering strong patient-provider relationships built on trust, compassion, and personalized care. Whether you’re in need of preventive screenings, managing chronic conditions, or seeking treatment for acute illnesses, Dr. Ilayaraja and our team are here to support you every step of the way. Experience comprehensive healthcare tailored to your individual needs in a welcoming and patient-centered environment. 
+                </p>
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
                 <Link to="/appointments">

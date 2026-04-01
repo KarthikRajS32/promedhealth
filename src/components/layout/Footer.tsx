@@ -135,8 +135,8 @@ export function Footer() {
         <div className="mt-20 pt-10 border-t border-brand-white/30 flex flex-col md:flex-row justify-between items-center gap-6 text-sm font-bold text-brand-accent/40">
           <p className='text-gray-200'>© {currentYear} ProMed Health Primary Care. Built with excellence.</p>
           <div className="flex gap-10">
-            <Link to="#" className="text-gray-300 hover:text-brand-white transition-colors">Privacy Policy</Link>
-            <Link to="#" className="text-gray-300 hover:text-brand-white transition-colors">Accessibility</Link>
+            <Link to="/privacy-policy" className="text-gray-300 hover:text-brand-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms-conditions" className="text-gray-300 hover:text-brand-white transition-colors">Terms & Conditions</Link>
           </div>
         </div>
       </div>
