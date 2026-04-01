@@ -14,7 +14,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-5 lg:col-span-1">
             <Link to="/">
-              <img src="/src/assets/promed-logo.png" alt="ProMed Health" className="h-14 w-auto brightness-0 invert" />
+              <img src="/images/promed-logo.png" alt="ProMed Health" className="h-14 w-auto brightness-0 invert" />
             </Link>
             <p className="text-sm text-white/50 leading-relaxed">
               Patient-centered primary care in Frisco, TX, led by Dr. Kavitha Ilayaraja, MD.

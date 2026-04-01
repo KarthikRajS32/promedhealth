@@ -47,7 +47,7 @@ export function Physicians() {
               className="flex flex-col gap-6"
             >
               <div className="max-w-sm mx-auto lg:mx-0 aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border border-slate-100">
-                <img src="/src/assets/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
+                <img src="/images/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
               </div>
             
             </motion.div>

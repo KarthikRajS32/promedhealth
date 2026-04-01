@@ -16,15 +16,15 @@ export function Home() {
   }, []);
 
   const plans = [
-    { name: 'Aetna', logo: '/src/assets/atena-1.png' },
-    { name: 'Texas Health', logo: '/src/assets/texax-helath.png' },
-    { name: 'BlueCross BlueShield', logo: '/src/assets/bcbs.png' },
-    { name: 'UnitedHealthcare', logo: '/src/assets/UHC2.png' },
-    { name: 'Cigna', logo: '/src/assets/Cigna.png' },
-    { name: 'Medicare', logo: '/src/assets/Medicare.png' },
-    { name: 'Humana', logo: '/src/assets/Humana.png' },
-    { name: 'First Health', logo: '/src/assets/first-health.png' },
-    { name: 'Self-Pay', logo: '/src/assets/self-pay.png' },
+    { name: 'Aetna', logo: '/images/atena-1.png' },
+    { name: 'Texas Health', logo: '/images/texax-helath.png' },
+    { name: 'BlueCross BlueShield', logo: '/images/bcbs.png' },
+    { name: 'UnitedHealthcare', logo: '/images/UHC2.png' },
+    { name: 'Cigna', logo: '/images/Cigna.png' },
+    { name: 'Medicare', logo: '/images/Medicare.png' },
+    { name: 'Humana', logo: '/images/Humana.png' },
+    { name: 'First Health', logo: '/images/first-health.png' },
+    { name: 'Self-Pay', logo: '/images/self-pay.png' },
   ];
 
   const fadeUp = {
@@ -61,7 +61,7 @@ export function Home() {
           className="lg:w-1/2 h-80 lg:h-auto relative overflow-hidden"
         >
           <img
-            src="/src/assets/doctor-team.png"
+            src="/images/doctor-team.png"
             alt="ProMed Health Modern Clinic Interior"
             className="w-full h-full object-cover"
           />
@@ -169,7 +169,7 @@ export function Home() {
               className="relative"
             >
               <div className="aspect-[4/5] max-w-sm mx-auto lg:mx-0 overflow-hidden rounded-md">
-                <img src="/src/assets/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
+                <img src="/images/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
               </div>
               
             </motion.div>

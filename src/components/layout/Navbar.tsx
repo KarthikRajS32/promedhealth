@@ -53,7 +53,7 @@ export function Navbar() {
 
             {/* Logo only */}
             <Link to="/" className="shrink-0">
-              <img src="/src/assets/promed-logo.png" alt="ProMed Health" className="h-14 w-auto object-contain" />
+              <img src="/images/promed-logo.png" alt="ProMed Health" className="h-14 w-auto object-contain" />
             </Link>
 
             {/* Desktop — underline style nav */}
