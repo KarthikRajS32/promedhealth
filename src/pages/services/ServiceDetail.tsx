@@ -129,7 +129,7 @@ export function ServiceDetail() {
                className="space-y-5"
             >
               {/* Book card */}
-              <div className="bg-brand-primary p-6 space-y-4">
+              <div className="bg-brand-primary p-6 space-y-4 rounded-md">
                 <div className="w-10 h-10 bg-brand-secondary/20 flex items-center justify-center text-brand-secondary">
                   <Icon size={18} strokeWidth={1.8} />
                 </div>
@@ -138,13 +138,13 @@ export function ServiceDetail() {
                   Consult with Dr. Kavitha Ilayaraja, MD about {service.title} at our Frisco practice.
                 </p>
                 <Link to="/appointments"
-                  className="flex items-center justify-center gap-2 bg-brand-secondary hover:bg-[#267a7a] text-white text-sm font-medium py-3 transition-colors w-full">
+                  className="flex items-center justify-center gap-2 bg-brand-secondary hover:bg-[#267a7a] text-white text-sm font-medium py-3 transition-colors w-full rounded-md">
                   <Calendar size={14} /> Book Appointment
                 </Link>
               </div>
 
               {/* Quick links */}
-              <div className="bg-brand-warm border border-slate-100 p-5 space-y-3">
+              <div className="bg-brand-warm border border-slate-100 p-5 space-y-3 rounded-md">
                 <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Patient Access</h4>
                 <ul className="space-y-2">
                   {[
@@ -170,7 +170,7 @@ export function ServiceDetail() {
               </div>
 
               {/* Other services */}
-              <div className="bg-brand-warm border border-slate-100 p-5 space-y-3">
+              <div className="bg-brand-warm border border-slate-100 p-5 space-y-3 rounded-md">
                 <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Other Services</h4>
                 <ul className="space-y-2">
                   {services.filter(s => s.id !== service.id).slice(0, 5).map(s => (

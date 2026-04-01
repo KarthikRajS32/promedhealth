@@ -83,7 +83,7 @@ export function Televisit() {
               </div>
 
               <a href={clinicInfo.portalUrls.televisit} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-brand-secondary hover:bg-[#007aab] text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors">
+                className="inline-flex items-center gap-2 bg-brand-secondary hover:bg-[#007aab] text-white text-sm font-semibold px-6 py-3 rounded-md transition-colors">
                 Start My Televisit
               </a>
             </motion.div>

@@ -306,11 +306,11 @@ export function Home() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <Link to="/appointments"
-              className="inline-flex items-center justify-center gap-2 bg-brand-secondary hover:bg-[#267a7a] text-white text-sm font-medium px-7 py-3.5 transition-colors">
+              className="inline-flex items-center justify-center gap-2 bg-brand-secondary hover:bg-[#267a7a] text-white text-sm font-medium px-7 py-3.5 transition-colors rounded-md">
               <Calendar size={14} /> Book Appointment
             </Link>
             <a href={`tel:${clinicInfo.contact.phone}`}
-              className="inline-flex items-center justify-center gap-2 border border-white/20 text-white/80 hover:bg-white/10 text-sm font-medium px-7 py-3.5 transition-colors">
+              className="inline-flex items-center justify-center gap-2 border border-white/20 text-white/80 hover:bg-white/10 text-sm font-medium px-7 py-3.5 transition-colors rounded-md">
               <Phone size={14} /> Call Us
             </a>
           </div>

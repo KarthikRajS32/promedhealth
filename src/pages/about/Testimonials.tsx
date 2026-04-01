@@ -32,14 +32,14 @@ export function Testimonials() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.05 }}
-                  className={`break-inside-avoid mb-5 flex flex-col gap-4 border hover:shadow-md transition-all duration-300 ${
+                  className={`break-inside-avoid mb-5 flex flex-col gap-4 border hover:shadow-md rounded-md transition-all duration-300 ${
                     isFeatured
                       ? 'bg-brand-primary border-brand-primary p-7'
                       : 'bg-white border-slate-100 hover:border-brand-secondary/30 p-6'
                   }`}
                 >
-                  {/* Stars + quote */}
-                  <div className="flex items-center justify-between">
+                  {/* quote */}
+                  <div className="flex items-center justify-between ">
                     <MessageSquare
                       size={20}
                       className={isFeatured ? 'text-white/20' : 'text-slate-200'}
