@@ -1,114 +1,177 @@
-import { SectionBanner } from '../../components/ui/SectionBanner';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { services } from '../../data/services';
-import { ServiceCard } from '../../components/ui/ServiceCard';
-import { ShieldCheck, Heart, Activity, Thermometer, Stethoscope, CheckCircle } from 'lucide-react';
+import { Stethoscope, Activity, ShieldCheck, ArrowUpRight, Plus, Sparkles, Heart } from 'lucide-react';
+import { cn } from '../../lib/utils';
+import { Link } from 'react-router-dom';
+import { Button } from '../../components/ui/Button';
 
 export function ServicesHub() {
+  const [filter, setFilter] = useState('all');
+
   const categories = [
-    { name: 'Primary Care', category: 'primary', icon: Stethoscope },
-    { name: 'Chronic Disease', category: 'chronic', icon: Activity },
-    { name: 'Specialized Medicine', category: 'specialized', icon: ShieldCheck },
+    { id: 'all', name: 'All Specialties', icon: Sparkles },
+    { id: 'primary', name: 'Primary Care', icon: Stethoscope },
+    { id: 'chronic', name: 'Chronic Disease', icon: Activity },
+    { id: 'specialized', name: 'Specialized', icon: ShieldCheck },
   ];
 
+  const filteredServices = filter === 'all' 
+    ? services 
+    : services.filter(s => s.category === filter);
+
   return (
-    <div className="flex flex-col">
-      <SectionBanner
-        title="Our Medical Services"
-        subtitle="Comprehensive high-quality healthcare for acute, chronic, and preventive medical needs."
-        breadcrumbs={[
-          { name: 'Services', path: '/services' }
-        ]}
-      />
+    <div className="flex flex-col bg-brand-surface pt-32 pb-48 selection:bg-brand-accent selection:text-white">
+      
+      {/* ── INTERACTIVE EXPLORER HEADER ── */}
+      <section className="container-custom relative mb-32">
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="max-w-4xl space-y-12 relative z-10">
+          <div className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-brand-primary text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.3em]">
+            <Plus size={14} className="text-brand-accent" /> Expert Care Portfolio
+          </div>
+          
+          <h1 className="text-6xl sm:text-8xl font-black text-brand-primary tracking-tighter leading-[0.9]">
+            Comprehensive <br />
+            <span className="text-slate-300">Evidence-Based</span> <br />
+            Medicine<span className="text-brand-accent">.</span>
+          </h1>
 
-      <section className="section-padding bg-brand-white pt-24 pb-32">
-        <div className="container-custom">
-          {categories.map((cat, idx) => (
-            <div key={cat.name} className={idx > 0 ? "mt-32" : ""}>
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-                <div className="max-w-2xl space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-brand-accent rounded-xl flex items-center justify-center text-brand-secondary">
-                       <cat.icon size={24} />
-                    </div>
-                    <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest leading-none">Category</h3>
-                  </div>
-                  <h2 className="text-4xl lg:text-7xl font-black text-brand-primary tracking-tight leading-tight">
-                    {cat.name}
-                  </h2>
-                </div>
-                <div className="h-1.5 w-32 bg-brand-secondary rounded-full hidden md:block" />
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-                {services
-                  .filter(s => s.category === cat.category)
-                  .map(service => (
-                    <ServiceCard key={service.id} service={service} />
-                  ))}
-              </div>
-            </div>
-          ))}
+          <div className="flex flex-wrap gap-3 pt-4">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setFilter(cat.id)}
+                className={cn(
+                  "flex items-center gap-3 px-8 h-16 rounded-[1.5rem] text-sm font-black uppercase tracking-widest transition-all duration-500",
+                  filter === cat.id 
+                    ? "bg-brand-accent text-white shadow-xl shadow-brand-accent/25 translate-y-[-4px]" 
+                    : "bg-white text-brand-muted border border-slate-100 hover:border-brand-accent hover:text-brand-accent"
+                )}
+              >
+                <cat.icon size={20} className={cn("transition-colors", filter === cat.id ? "text-white" : "text-brand-accent/40")} />
+                {cat.name}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Expertise Section */}
-      <section className="section-padding bg-brand-primary text-brand-white relative overflow-hidden group">
-         <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none group-hover:scale-110 transition-transform duration-1000 rotate-12">
-            <Heart size={320} />
-         </div>
-
-         <div className="container-custom relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-               <div className="space-y-10">
-                  <div className="h-2 w-20 bg-brand-secondary rounded-full" />
-                  <h2 className="text-5xl lg:text-8xl font-black leading-tight tracking-tight">Our Clinical <br/> Philosophy</h2>
-                  <p className="text-xl font-medium text-brand-accent/80 leading-relaxed">
-                    Lead by Dr. Kavitha Ilayaraja, MD, ProMed Health is 
-                    committed to an internal medical practice that combines 
-                    evidence-based science with compassionate human connection.
-                  </p>
+      {/* ── ASYMMETRIC SERVICE GRID ── */}
+      <section className="container-custom min-h-[600px]">
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-10"
+        >
+          <AnimatePresence>
+            {filteredServices.map((service, idx) => {
+              const ServiceIcon = service.icon;
+              const isLarge = idx % 5 === 0;
+              
+              return (
+                <motion.div
+                  key={service.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                  transition={{ duration: 0.5, delay: idx * 0.05 }}
+                  className={cn(
+                    "group relative overflow-hidden flex flex-col justify-between p-10 bg-white border border-slate-100 rounded-[3.5rem] transition-all duration-700 hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)]",
+                    isLarge ? "md:col-span-2 xl:col-span-2 aspect-[auto] min-h-[350px] md:min-h-[450px]" : "aspect-square"
+                  )}
+                >
+                  <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none group-hover:scale-125 transition-transform duration-1000 rotate-12">
+                     <ServiceIcon size={isLarge ? 200 : 120} />
+                  </div>
                   
-                  <div className="grid sm:grid-cols-2 gap-8">
-                     {[
-                       { title: "Personalized", desc: "Every treatment plan is tailored to your unique history, values, and health goals." },
-                       { title: "Coordinated", desc: "We seamless coordinate with specialists and Medicare plans for unified care." },
-                       { title: "Preventative", desc: "Focusing on wellness first to prevent acute issues before they start." },
-                       { title: "Accessible", desc: "With same-day visits and telemedicine, we are here when you need us." }
-                     ].map((item, idx) => (
-                        <div key={idx} className="space-y-2">
-                           <h4 className="text-xl font-black tracking-tight">{item.title}</h4>
-                           <p className="text-sm font-bold text-brand-accent/60 leading-relaxed">{item.desc}</p>
-                        </div>
-                     ))}
+                  <div className="relative z-10 w-fit">
+                    <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all duration-500 mb-8">
+                       <ServiceIcon size={28} />
+                    </div>
                   </div>
-               </div>
 
-               <div className="p-12 lg:p-20 bg-brand-white rounded-[64px] shadow-2xl relative rotate-2 group-hover:rotate-0 transition-all duration-700">
-                  <div className="space-y-12">
-                     <div className="flex items-center gap-6">
-                        <div className="w-20 h-20 bg-brand-accent rounded-[32px] flex items-center justify-center text-brand-secondary">
-                          <Thermometer size={40} />
-                        </div>
-                        <h3 className="text-2xl font-black text-brand-primary tracking-tight md:text-3xl">Expert Primary Care <br/> Since Day One</h3>
-                     </div>
-                     
-                     <p className="text-lg font-bold text-slate-500 leading-relaxed italic">
-                        "Continuity of care is the foundation of patient wellness. 
-                        We don't just treat symptoms; we treat the whole person."
-                     </p>
-                     
-                     <div className="pt-10 border-t border-brand-accent flex items-center justify-between">
-                        <div>
-                           <h4 className="text-xl font-black text-brand-primary">Dr. Kavitha Ilayaraja, MD</h4>
-                           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Lead Medical Specialist</p>
-                        </div>
-                        <CheckCircle size={32} className="text-brand-secondary" />
-                     </div>
+                  <div className="relative z-10 space-y-4">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted leading-none">{service.category}</p>
+                    <h3 className={cn(
+                      "font-black text-brand-primary tracking-tighter leading-none mb-4",
+                      isLarge ? "text-4xl md:text-5xl" : "text-3xl"
+                    )}>
+                      {service.title}
+                    </h3>
+                    <p className={cn(
+                      "text-brand-muted font-medium mb-8",
+                      isLarge ? "max-w-md text-lg" : "text-sm line-clamp-2"
+                    )}>
+                      {service.shortDescription}
+                    </p>
+                    <Link to={`/services/${service.id}`} className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-widest text-brand-accent group/btn">
+                      Explore Treatment 
+                      <div className="w-10 h-10 border border-brand-accent/20 rounded-xl flex items-center justify-center group-hover/btn:bg-brand-accent group-hover/btn:text-white transition-all">
+                        <ArrowUpRight size={16} />
+                      </div>
+                    </Link>
                   </div>
-               </div>
-            </div>
-         </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
       </section>
+
+      {/* ── BOLD PHILOSOPHY CTA ── */}
+      <section className="container-custom mt-48">
+        <div className="relative rounded-[4rem] bg-brand-primary p-12 lg:p-24 overflow-hidden group">
+           <img 
+            src="/C:\Users\Hope3\.gemini\antigravity\brain\a4a45535-d6fc-41d1-9567-a6e243cacc1d\medical_specialties_abstract_1775032262990.png" 
+            alt="Medical Abstract" 
+            className="absolute inset-0 w-full h-full object-cover opacity-20 scale-110 group-hover:scale-100 transition-transform duration-[3s]"
+           />
+           <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary via-brand-primary/80 to-transparent" />
+           
+           <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+              <div className="space-y-10">
+                <h2 className="text-5xl lg:text-7xl font-black text-white leading-none tracking-tighter">
+                  Our Clinical <br />
+                  <span className="text-white/30">Philosophy.</span>
+                </h2>
+                <p className="text-xl text-white/50 font-medium leading-relaxed max-w-xl">
+                  Led by Dr. Kavitha Ilayaraja, MD, we combine evidence-based medicine with the art of compassionate human connection to treat the whole person, not just the symptoms.
+                </p>
+                <div className="pt-4 flex flex-col sm:flex-row gap-6">
+                   <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-brand-accent rounded-2xl flex items-center justify-center text-white font-black"><Heart size={20} /></div>
+                      <div>
+                        <p className="text-white font-black leading-tight">Patient-First</p>
+                        <p className="text-[10px] text-white/30 font-black uppercase tracking-widest">Protocol</p>
+                      </div>
+                   </div>
+                   <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-brand-accent font-black"><Plus size={20} /></div>
+                      <div>
+                        <p className="text-white font-black leading-tight">Integrative</p>
+                        <p className="text-[10px] text-white/30 font-black uppercase tracking-widest">Technique</p>
+                      </div>
+                   </div>
+                </div>
+              </div>
+              
+              <div className="glass-dark rounded-[3rem] p-12 space-y-8 flex flex-col items-center text-center">
+                <div className="w-20 h-20 bg-brand-accent rounded-3xl flex items-center justify-center text-white">
+                  <Stethoscope size={40} />
+                </div>
+                <h3 className="text-3xl font-black text-white px-4">Ready to consult with Dr. Kavitha Ilayaraja?</h3>
+                <Link to="/appointments">
+                  <Button size="xl" className="px-16 rounded-3xl group">
+                    Schedule Initial Visit <ArrowUpRight className="ml-2 transition-transform group-hover:rotate-45" />
+                  </Button>
+                </Link>
+              </div>
+           </div>
+        </div>
+      </section>
+
     </div>
   );
 }

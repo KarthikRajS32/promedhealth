@@ -1,143 +1,147 @@
 import { Link } from 'react-router-dom';
-import { Phone, MapPin, ArrowRight, Clock } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { ArrowUpRight, Globe, Share2, Shield, Heart } from 'lucide-react';
 import { clinicInfo } from '../../data/content';
 import { services } from '../../data/services';
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const footerLinks = [
-    {
-      title: "Quick Links",
-      links: [
-        { name: "Home", path: "/" },
-        { name: "About Us", path: "/about" },
-        { name: "Our Physicians", path: "/about/physicians" },
-        { name: "Testimonials", path: "/about/testimonials" },
-        { name: "Contact", path: "/contact" },
-      ],
-    },
-    {
-      title: "Patient Resources",
-      links: [
-        { name: "Televisit", path: "/patient-access/televisit" },
-        { name: "Patient Portal", path: "/patient-access/portal" },
-        { name: "Pay Your Bill", path: "/patient-access/bill-pay" },
-        { name: "Insurance Info", path: "/patient-access/insurance" },
-        { name: "Book Appointment", path: "/appointments" },
-      ],
-    },
-    {
-      title: "Services",
-      links: services.slice(0, 5).map(s => ({ name: s.title, path: `/services/${s.id}` })),
-    },
-  ];
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-brand-primary text-brand-white pt-24 pb-12 overflow-hidden border-t border-brand-secondary/30">
+    <footer className="bg-brand-primary text-white pt-24 pb-12 overflow-hidden relative">
+      {/* Decorative Glow */}
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-accent/10 rounded-full blur-[120px] pointer-events-none" />
+      
       <div className="container-custom">
-        <div className="grid lg:grid-cols-4 gap-16 lg:gap-12">
-          {/* Branding */}
-          <div className="space-y-8 lg:col-span-1">
-            <Link to="/" className="flex items-center gap-3">
-              <img
-                src="/src/assets/promed-logo.png"
-                alt="ProMed Health"
-                className="h-18 lg:h-18 w-auto object-contain brightness-0 invert"
-              />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          
+          {/* Brand & Contact — 5 cols */}
+          <div className="lg:col-span-5 space-y-10">
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="w-12 h-12 bg-brand-accent rounded-2xl flex items-center justify-center text-white font-black text-2xl group-hover:rotate-6 transition-transform">P</div>
+              <span className="font-heading font-extrabold text-2xl tracking-tighter">ProMed<span className="text-brand-accent">.</span></span>
             </Link>
-            <p className="text-brand-accent/80 leading-relaxed text-[15px] font-medium max-w-xs">
-              Providing exceptional, patient-centered healthcare with compassion and expertise.
-              Led by Dr. Kavitha Ilayaraja, MD, we are dedicated to your wellness journey.
-            </p>
-            <div className="pt-4">
-              <h5 className="text-sm font-black uppercase tracking-widest text-brand-secondary mb-4">Location Map</h5>
-              <div className="rounded-2xl overflow-hidden transition-all duration-500 border border-brand-secondary/30 h-40 shadow-2xl">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.670356763442!2d-96.7562854!3d33.1558235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c3c393bc3075f%3A0xc6cb1c7df8b64e0!2s11691%20Independence%20Pkwy%20%23110%2C%20Frisco%2C%20TX%2075035!5e0!3m2!1sen!2sus!4v1711894000000!5m2!1sen!2sus"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen={true}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+            
+            <h2 className="text-3xl sm:text-4xl font-bold leading-[1.1] tracking-tight text-white/90">
+              Modern Primary Care<br />
+              <span className="text-white/40">Redefining standards in Frisco.</span>
+            </h2>
+
+            <div className="grid sm:grid-cols-2 gap-8 pt-4">
+              <div className="space-y-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">Direct Line</p>
+                <a href={`tel:${clinicInfo.contact.phone}`} className="block text-lg font-bold hover:text-brand-accent transition-colors">
+                  {clinicInfo.contact.phone}
+                </a>
+                <a href={`mailto:${clinicInfo.contact.email}`} className="block text-sm font-medium text-white/50 hover:text-white transition-colors">
+                  {clinicInfo.contact.email}
+                </a>
               </div>
+              <div className="space-y-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">Our Location</p>
+                <p className="text-sm font-medium text-white/60 leading-relaxed">
+                  {clinicInfo.contact.address.street}<br />
+                  {clinicInfo.contact.address.city}, {clinicInfo.contact.address.state} {clinicInfo.contact.address.zip}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 pt-4">
+              {[Globe, Share2, Shield, Heart].map((Icon, i) => (
+                <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-accent hover:border-brand-accent transition-all group">
+                  <Icon size={18} className="text-white/40 group-hover:text-white transition-colors" />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Links Sections */}
-          <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-12">
-            {footerLinks.slice(0, 2).map((section) => (
-              <div key={section.title} className="space-y-8">
-                <h5 className="text-xl font-black relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-brand-secondary rounded-full">
-                  {section.title}
-                </h5>
+          {/* Navigation — 7 cols */}
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-12 sm:gap-8">
+              
+              {/* Services Column */}
+              <div className="space-y-6">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">Specialties</p>
                 <ul className="space-y-4">
-                  {section.links.map((link) => (
-                    <li key={link.name}>
-                      <Link
-                        to={link.path}
-                        className="group flex items-center gap-3 text-[15px] font-bold text-brand-accent/70 hover:text-brand-white transition-colors"
-                      >
-                        <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 -translate-x-3 group-hover:translate-x-0 transition-all duration-300 text-brand-secondary" />
-                        {link.name}
+                  {services.slice(0, 6).map(s => (
+                    <li key={s.id}>
+                      <Link to={`/services/${s.id}`} className="text-sm font-bold text-white/40 hover:text-brand-accent transition-colors flex items-center justify-between group">
+                        {s.title} <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
 
-          {/* Contact info in footer */}
-          <div className="space-y-8">
-            <h5 className="text-xl font-black relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-brand-secondary rounded-full">
-              Get In Touch
-            </h5>
-            <div className="space-y-6">
-              <a href={`tel:${clinicInfo.contact.phone}`} className="flex items-center gap-4 text-[15px] font-bold hover:text-brand-accent transition-colors group">
-                <div className="w-10 h-10 bg-brand-white/10 rounded-xl flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-brand-white transition-all">
-                  <Phone size={18} />
-                </div>
-                {clinicInfo.contact.phone}
-              </a>
-              <div className="flex items-start gap-4 text-[15px] font-bold">
-                <div className="w-10 h-10 bg-brand-white/10 rounded-xl flex items-center justify-center text-brand-secondary mt-1 shrink-0">
-                  <MapPin size={18} />
-                </div>
-                <div className="leading-relaxed">
-                  {clinicInfo.contact.address.street},<br />
-                  {clinicInfo.contact.address.city}, TX {clinicInfo.contact.address.zip}
-                </div>
+              {/* Patients Column */}
+              <div className="space-y-6">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">For Patients</p>
+                <ul className="space-y-4">
+                  {[
+                    { name: 'Patient Portal', path: 'https://health.healow.com/PHPC' },
+                    { name: 'Schedule Visit', path: '/appointments' },
+                    { name: 'Televisit Guide', path: '/patient-access/televisit' },
+                    { name: 'Insurance List', path: '/patient-access/insurance' },
+                    { name: 'Pay Your Bill', path: '/patient-access/bill-pay' },
+                  ].map(l => (
+                    <li key={l.name}>
+                      <Link to={l.path} className="text-sm font-bold text-white/40 hover:text-brand-accent transition-colors flex items-center justify-between group">
+                        {l.name} <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="flex items-start gap-4 text-[15px] font-bold">
-                <div className="w-10 h-10 bg-brand-white/10 rounded-xl flex items-center justify-center text-brand-secondary mt-1 shrink-0">
-                  <Clock size={18} />
-                </div>
-                <div>
-                  Mon - Fri: 8:00 AM – 5:00 PM<br />
-                  <span className="text-brand-accent/90">Sat - Sun: Closed</span>
-                </div>
+
+              {/* Company Column */}
+              <div className="space-y-6 col-span-2 sm:col-span-1">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">Practice</p>
+                <ul className="space-y-4">
+                  {[
+                    { name: 'About Dr. Kavitha', path: '/about/physicians' },
+                    { name: 'Our Location', path: '/locations/frisco' },
+                    { name: 'Reviews', path: '/about/testimonials' },
+                    { name: 'Contact', path: '/contact' },
+                    { name: 'Careers', path: '#' },
+                  ].map(l => (
+                    <li key={l.name}>
+                      <Link to={l.path} className="text-sm font-bold text-white/40 hover:text-brand-accent transition-colors flex items-center justify-between group">
+                        {l.name} <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
+
             </div>
-            <div className="pt-4">
-              <Link to="/appointments">
-                <Button className="w-full bg-brand-secondary text-brand-white hover:bg-brand-white hover:text-brand-primary h-14 rounded-xl text-sm font-black uppercase tracking-widest">
-                  Book Online Now
-                </Button>
-              </Link>
+
+            {/* Bottom Actions Area */}
+            <div className="mt-16 bg-white/[0.03] border border-white/5 rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="space-y-2 text-center md:text-left">
+                <p className="text-lg font-bold">Accepting New Patients</p>
+                <p className="text-sm text-white/40">Secure your appointment online in less than 2 minutes.</p>
+              </div>
+              <div className="flex items-center gap-4 shrink-0">
+                <Link to="/appointments" className="px-8 h-12 bg-white text-brand-primary rounded-2xl flex items-center justify-center font-black text-sm hover:bg-brand-accent hover:text-white transition-all">
+                  Book Now
+                </Link>
+                <a href={`tel:${clinicInfo.contact.phone}`} className="px-8 h-12 bg-white/5 border border-white/10 text-white rounded-2xl flex items-center justify-center font-black text-sm hover:bg-white/10 transition-all">
+                  Call Clinic
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-20 pt-10 border-t border-brand-white/30 flex flex-col md:flex-row justify-between items-center gap-6 text-sm font-bold text-brand-accent/40">
-          <p className='text-gray-200'>© {currentYear} ProMed Health Primary Care. Built with excellence.</p>
-          <div className="flex gap-10">
-            <Link to="#" className="text-gray-300 hover:text-brand-white transition-colors">Privacy Policy</Link>
-            <Link to="#" className="text-gray-300 hover:text-brand-white transition-colors">Accessibility</Link>
+        {/* Copyright Area */}
+        <div className="mt-24 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-white/20">
+            <Link to="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="#" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link to="#" className="hover:text-white transition-colors">Accessibility</Link>
           </div>
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/20">
+            © {year} ProMed Health. Built for Excellence.
+          </p>
         </div>
       </div>
     </footer>

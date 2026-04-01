@@ -10,38 +10,28 @@ interface ServiceCardProps {
 
 export function ServiceCard({ service, className }: ServiceCardProps) {
   const Icon = service.icon;
-  
   return (
-    <Link 
+    <Link
       to={`/services/${service.id}`}
       className={cn(
-        "group relative p-8 bg-brand-white rounded-3xl border border-slate-100 shadow-sm transition-all duration-500 hover:shadow-2xl hover:shadow-brand-primary/10 hover:-translate-y-2",
+        "group flex flex-col gap-5 p-7 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-brand-secondary/30 hover:-translate-y-1 transition-all duration-300",
         className
       )}
     >
-      <div className="flex flex-col h-full space-y-6">
-        <div className="w-16 h-16 rounded-2xl bg-brand-accent flex items-center justify-center text-brand-secondary transition-all duration-500 group-hover:bg-brand-primary group-hover:text-brand-white group-hover:rotate-6">
-          <Icon size={32} strokeWidth={1.5} />
-        </div>
-        
-        <div className="space-y-4">
-          <h3 className="text-2xl font-black text-brand-primary tracking-tight md:text-3xl leading-tight transition-colors group-hover:text-brand-secondary">
-            {service.title}
-          </h3>
-          
-          <p className="text-[15px] font-medium text-slate-600 leading-relaxed max-w-sm">
-            {service.shortDescription}
-          </p>
-        </div>
-
-        <div className="mt-auto pt-6 flex items-center gap-3 text-brand-primary font-black text-sm uppercase tracking-widest transition-all group-hover:gap-5">
-          <span>Read More</span>
-          <ArrowRight size={18} className="transition-transform" />
-        </div>
+      <div className="w-12 h-12 rounded-xl bg-brand-accent flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition-all duration-300">
+        <Icon size={22} strokeWidth={1.8} />
       </div>
-      
-      {/* Subtle border bottom line */}
-      <div className="absolute bottom-0 left-0 h-1.5 bg-brand-secondary rounded-full transition-all duration-500 w-0 group-hover:w-full opacity-30" />
+      <div className="space-y-2 flex-1">
+        <h3 className="text-base font-bold text-brand-primary group-hover:text-brand-secondary transition-colors">
+          {service.title}
+        </h3>
+        <p className="text-sm text-slate-500 leading-relaxed">
+          {service.shortDescription}
+        </p>
+      </div>
+      <div className="flex items-center gap-2 text-brand-secondary text-sm font-semibold">
+        Learn more <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+      </div>
     </Link>
   );
 }

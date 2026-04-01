@@ -1,297 +1,334 @@
-import { ArrowRight, CheckCircle, Calendar, Phone, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { ArrowRight, Star, Heart, ArrowUpRight, Check, Activity, Users } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { services } from '../data/services';
 import { clinicInfo, testimonials } from '../data/content';
 import { Button } from '../components/ui/Button';
-import { ServiceCard } from '../components/ui/ServiceCard';
+import { cn } from '../lib/utils';
+import heroImage from '../assets/hero.png';
 
 export function Home() {
-  const featuredServices = services.slice(0, 6);
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent(prev => (prev + 1) % testimonials.length);
-    }, 10000);
-    return () => clearInterval(timer);
-  }, []);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const featuredServices = services.slice(0, 10);
+  
+  const journeySteps = [
+    { title: "Convenience", desc: "Same-day appointments and minimal wait times.", icon: Activity },
+    { title: "Compassion", desc: "Expert care under board-certified Dr. Kavitha.", icon: Heart },
+    { title: "Coordination", desc: "Seamless primary care & specialist management.", icon: Activity },
+    { title: "Community", desc: "Serving Frisco families with personalized attention.", icon: Users },
+  ];
 
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      {/* Hero Section */}
-      <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-48 lg:pb-32 bg-brand-primary overflow-hidden">
-        <div className="container-custom relative z-10">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            <div className="space-y-6 sm:space-y-8 text-center lg:text-left animate-in fade-in slide-in-from-left-10 duration-700">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-white/10 border border-brand-white/20 rounded-full text-brand-white text-xs sm:text-sm font-black tracking-widest">
-                <CheckCircle size={14} className="text-brand-secondary" />
-                Now Accepting New Patients
-              </div>
-              
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-white leading-tight tracking-tight">
-                Where Compassion Meets <span className="text-brand-secondary italic">Connection.</span>
-              </h1>
-              
-              <p className="text-base sm:text-xl text-brand-accent/80 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
-                ProMed Health Primary Care is dedicated to providing high-quality, 
-                patient-centered medical services under the expert leadership of Dr. Kavitha Ilayaraja, MD.
-              </p>
+    <div className="flex flex-col bg-brand-surface selection:bg-brand-accent selection:text-white">
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-2 justify-center lg:justify-start">
-                <Link to="/appointments">
-                  <Button size="md" className="gap-3 w-full sm:w-auto">
-                    <Calendar size={20} /> Schedule Appointment
-                  </Button>
-                </Link>
-                <a href={`tel:${clinicInfo.contact.phone}`}>
-                  <Button variant="outline" size="md" className="border-brand-white/30 text-brand-white hover:bg-brand-white hover:text-brand-primary gap-3 w-full sm:w-auto">
-                    <Phone size={20} /> (945) 221-6442
-                  </Button>
-                </a>
-              </div>
+      {/* ── IMMERSIVE SPLIT HERO ── */}
+      <section className="relative min-h-[95vh] flex flex-col lg:flex-row overflow-hidden bg-brand-primary">
+        {/* Left Panel: Content */}
+        <div className="w-full lg:w-[60%] relative z-20 flex flex-col justify-center px-6 lg:px-20 py-28 lg:py-16">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }} 
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-10"
+          >
+            <div className="inline-flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-2xl px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.25em] text-brand-accent">
+              <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
+              Now Accepting New Patients
             </div>
-            
-            <div className="relative group mt-8 lg:mt-0">
-              <div className="aspect-[5/6] sm:aspect-[3/4]  max-w-[280px] sm:max-w-sm mx-auto rounded-[32px] overflow-hidden bg-brand-accent border-[8px] sm:border-[12px] border-brand-white/10 shadow-2xl relative rotate-2 group-hover:rotate-0 transition-transform duration-700">
-                <div className="absolute inset-0 bg-brand-secondary/20 mix-blend-overlay" />
-                <img src="/src/assets/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
-              </div>
-              
-              {/* Floating Stat Card */}
-              <div className="absolute -bottom-6 left-0 sm:-bottom-8 sm:-left-6 bg-brand-white p-3 sm:p-4 rounded-2xl shadow-2xl border border-brand-accent max-w-[160px] sm:max-w-[200px]">
-                <h4 className="text-xs sm:text-sm font-black text-brand-primary">Dr. Kavitha Ilayaraja MD</h4>
-                <p className="text-xs font-bold text-slate-500 mt-0.5">Primary Care Physician</p>
-              </div>
+
+            <h1 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white leading-[0.9] tracking-tighter">
+              Exceptional <br />
+              <span className="text-white/30">Primary Care.</span><br />
+              Personalized.
+            </h1>
+
+            <p className="text-lg text-white/50 leading-relaxed max-w-xl font-medium">
+              Join ProMed Health for a healthcare experience built on trust, coordination, and the expert leadership of Dr. Kavitha Ilayaraja, MD.
+            </p>
+
+            <div className="flex flex-wrap gap-5 pt-4">
+              <Link to="/appointments">
+                <Button size="xl" className="gap-3 group">
+                  Book Appointment <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <a href={`tel:${clinicInfo.contact.phone}`}>
+                <Button variant="outline" size="xl" className="border-white/10 text-white hover:bg-white hover:text-brand-primary">
+                  {clinicInfo.contact.phone}
+                </Button>
+              </a>
             </div>
+
+            {/* Floating Quick Feature */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 pt-12 border-t border-white/5">
+              {[
+                { label: 'Board Certified', val: 'MD' },
+                { label: 'Patient Rating', val: '5.0★' },
+                { label: 'Wait Times', val: 'Minimal' },
+              ].map((stat) => (
+                <div key={stat.label} className="space-y-1">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-muted">{stat.label}</p>
+                  <p className="text-xl font-black text-white">{stat.val}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right Panel: Immersive Visual */}
+        <div className="w-full lg:w-[40%] relative min-h-[400px] lg:min-h-full overflow-hidden">
+          <img 
+            src={heroImage} 
+            alt="Modern Clinic" 
+            className="absolute inset-0 w-full h-full object-cover scale-110 opacity-70 group-hover:scale-100 transition-transform duration-1000"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-primary lg:bg-gradient-to-l lg:from-brand-primary/80 lg:to-transparent" />
+          
+          {/* Glassmorphic Stats Widget */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="absolute bottom-12 right-12 glass-dark rounded-3xl p-8 max-w-xs space-y-6"
+          >
+            <div className="flex -space-x-4">
+              {[1,2,3,4].map(i => (
+                <div key={i} className="w-12 h-12 rounded-2xl border-4 border-brand-primary bg-slate-800" />
+              ))}
+              <div className="w-12 h-12 rounded-2xl border-4 border-brand-primary bg-brand-accent flex items-center justify-center text-white font-black text-xs">+1k</div>
+            </div>
+            <div className="space-y-1">
+              <p className="text-xl font-black text-white tracking-tight">Active Patients</p>
+              <p className="text-xs text-white/40 font-bold uppercase tracking-widest leading-none">Trusted in Frisco, TX</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── HORIZONTAL JOURNEY — SIDE SCROLL ── */}
+      <section className="py-32 overflow-hidden bg-brand-surface border-b border-slate-100">
+        <div className="container-custom">
+          <div className="flex flex-col lg:flex-row items-end justify-between gap-12 mb-20">
+            <div className="space-y-6 lg:max-w-xl text-center lg:text-left">
+              <p className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-accent">Beyond The Clinic</p>
+              <h2 className="text-5xl lg:text-6xl font-black text-brand-primary tracking-tighter leading-none">
+                A seamless experience <br />
+                <span className="text-slate-300">from start to finish.</span>
+              </h2>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-1 bg-brand-accent rounded-full" />
+              <p className="text-sm font-black uppercase tracking-[0.1em] text-brand-primary shrink-0">Our Core Principles</p>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {journeySteps.map((step) => {
+              const Icon = step.icon;
+              return (
+                <motion.div 
+                  key={step.title}
+                  whileHover={{ y: -10 }}
+                  className="group p-10 bg-white border border-slate-100 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:shadow-brand-accent/5 transition-all duration-500"
+                >
+                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-brand-primary group-hover:bg-brand-accent group-hover:text-white transition-all duration-500 mb-8">
+                    <Icon size={28} />
+                  </div>
+                  <h4 className="text-2xl font-black text-brand-primary mb-4">{step.title}</h4>
+                  <p className="text-sm text-brand-muted font-medium leading-relaxed">{step.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Utility Bar (Quick Actions) */}
-      <section className="bg-brand-white border-b border-brand-accent relative z-20 mt-8 sm:-mt-12 mx-4 lg:mx-auto container-custom rounded-3xl shadow-xl p-6 sm:p-8 lg:p-12">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-12">
-          {[
-            { title: "Televisit", link: "/patient-access/televisit", icon: "Video", desc: "Consult with Dr. Ilayaraja from the comfort of your home." },
-            { title: "Patient Portal", link: "/patient-access/portal", icon: "Layout", desc: "Access your medical records and secure messages." },
-            { title: "Insurance Plans", link: "/patient-access/insurance", icon: "Shield", desc: "We accept most major insurance plans and medicare." }
-          ].map((item, idx) => (
-            <Link key={idx} to={item.link} className="group flex items-start gap-6 p-4 rounded-2xl hover:bg-brand-accent transition-colors">
-              <div className="w-10 sm:w-14 h-10 sm:h-14 bg-brand-primary rounded-2xl flex items-center justify-center text-brand-white group-hover:bg-brand-secondary transition-colors">
-                <ArrowRight size={20} className="group-hover:rotate-45 transition-transform sm:w-6 sm:h-6" />
-              </div>
-              <div>
-                <h3 className="text-xl font-black text-brand-primary group-hover:text-brand-secondary transition-colors">{item.title}</h3>
-                <p className="text-sm font-bold text-slate-500 mt-1 leading-relaxed">{item.desc}</p>
-              </div>
+      {/* ── GEOMETRIC BENTO GRID — SPECIALTIES ── */}
+      <section className="section-padding bg-white relative overflow-hidden">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-20">
+            <h2 className="text-5xl font-black text-brand-primary tracking-tighter mb-6">Expert Specialties</h2>
+            <p className="text-brand-muted font-bold text-sm tracking-widest uppercase">Comprehensive care across all major disciplines</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-[250px]">
+            {/* Large Card: Preventive */}
+            {(() => {
+              const ServiceIcon = featuredServices[3].icon;
+              return (
+                <Link to={`/services/${featuredServices[3].id}`} className="md:col-span-6 lg:col-span-7 row-span-2 group relative overflow-hidden rounded-[3rem] bg-brand-primary text-left">
+                  <div className="absolute inset-0 bg-brand-accent opacity-0 group-hover:opacity-10 transition-opacity" />
+                  <div className="absolute inset-0 p-12 flex flex-col justify-between">
+                    <ServiceIcon size={50} className="text-brand-accent" />
+                    <div className="space-y-4">
+                      <h3 className="text-4xl font-black text-white">{featuredServices[3].title}</h3>
+                      <p className="text-white/50 font-medium max-w-sm">{featuredServices[3].shortDescription}</p>
+                      <div className="flex items-center gap-2 text-brand-accent text-sm font-black pt-4 uppercase tracking-[0.15em]">
+                        View Details <ArrowUpRight size={16} />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })()}
+
+            {/* Square: Diabetes */}
+            {(() => {
+              const ServiceIcon = featuredServices[4].icon;
+              return (
+                <Link to={`/services/${featuredServices[4].id}`} className="md:col-span-3 lg:col-span-5 row-span-2 group relative overflow-hidden rounded-[3rem] bg-brand-accent text-white p-12 flex flex-col justify-between text-left">
+                  <ServiceIcon size={40} className="text-white bg-white/20 p-2 rounded-xl" />
+                  <div className="space-y-3">
+                    <h3 className="text-3xl font-black">{featuredServices[4].title}</h3>
+                    <p className="text-white/70 text-sm font-medium leading-relaxed">{featuredServices[4].shortDescription}</p>
+                  </div>
+                  <div className="bg-white text-brand-accent w-12 h-12 rounded-2xl flex items-center justify-center translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                    <ArrowRight size={24} />
+                  </div>
+                </Link>
+              );
+            })()}
+
+            {/* Rect: Heart */}
+            <Link to={`/services/${featuredServices[6].id}`} className="md:col-span-3 lg:col-span-4 row-span-1 group relative overflow-hidden rounded-[2.5rem] bg-slate-50 p-8 hover:bg-slate-100 transition-colors flex items-center gap-6 text-left">
+                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-brand-primary shadow-sm">
+                  <Heart size={24} />
+                </div>
+                <div>
+                  <p className="text-lg font-black text-brand-primary leading-tight">Cardiovascular<br />Care</p>
+                  <p className="text-xs text-brand-muted font-bold uppercase mt-1">Specialized</p>
+                </div>
+                <ArrowUpRight className="ml-auto text-slate-300 opacity-60" />
             </Link>
-          ))}
+
+            {/* Rect: Chronic */}
+            {featuredServices[9] && (
+              <Link to={`/services/${featuredServices[9].id}`} className="md:col-span-3 lg:col-span-4 row-span-1 group relative overflow-hidden rounded-[2.5rem] bg-slate-50 p-8 hover:bg-slate-100 transition-colors flex items-center gap-6 text-left">
+                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-brand-primary shadow-sm">
+                    <Activity size={24} />
+                  </div>
+                  <div>
+                    <p className="text-lg font-black text-brand-primary leading-tight">Chronic Care<br />Management</p>
+                    <p className="text-xs text-brand-muted font-bold uppercase mt-1">Ongoing Support</p>
+                  </div>
+                  <ArrowUpRight className="ml-auto text-slate-300 opacity-60" />
+              </Link>
+            )}
+
+            {/* Mini: All Services */}
+            <Link to="/services" className="md:col-span-6 lg:col-span-4 row-span-1 bg-brand-primary text-white rounded-[2.5rem] p-8 flex items-center justify-between group text-left">
+               <span className="text-2xl font-black">Browse All <br /> <span className="text-white/30">15+ Services</span></span>
+               <div className="w-14 h-14 rounded-full border-2 border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-brand-primary transition-all duration-500">
+                  <ArrowRight size={24} />
+               </div>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Services Hub Section */}
-      <section className="section-padding bg-brand-white">
-        <div className="container-custom">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 gap-6 sm:gap-8">
-            <div className="max-w-2xl space-y-4 sm:space-y-6">
-              <div className="h-1.5 w-20 bg-brand-secondary rounded-full" />
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-brand-primary">Our Comprehensive <br/> Medical Services</h2>
-              <p className="text-base sm:text-xl font-medium text-slate-600 leading-relaxed">
-                From preventive medicine to complex chronic care, we provide 
-                expert primary healthcare for all your medical needs.
-              </p>
+      {/* ── STAGGERED MOSAIC — TESTIMONIALS ── */}
+      <section className="py-36 bg-brand-surface border-y border-slate-100 overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-[40vw] h-full bg-brand-accent/5 pointer-events-none" />
+        <div className="container-custom relative z-10">
+          <div className="grid lg:grid-cols-12 gap-20 items-center">
+            
+            <div className="lg:col-span-5 space-y-10 text-center lg:text-left">
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-muted leading-none">Shared Experiences</p>
+              <h2 className="text-6xl font-black text-brand-primary tracking-tighter leading-[0.9]">
+                The standard <br />
+                <span className="text-brand-accent">we set daily.</span>
+              </h2>
+              <div className="flex gap-1.5 justify-center lg:justify-start">
+                {[...Array(5)].map((_, i) => <Star key={i} size={16} className="fill-brand-accent text-brand-accent" />)}
+                <span className="ml-3 text-sm font-black text-brand-primary uppercase tracking-widest">4.9 Average Rating</span>
+              </div>
+              <div className="pt-6">
+                 <Link to="/about/testimonials">
+                    <Button variant="outline" size="lg" className="px-10 h-16 rounded-[1.5rem] text-sm font-black uppercase tracking-widest">Read All Stories</Button>
+                 </Link>
+              </div>
             </div>
-            <Link to="/services">
-              <Button variant="outline" size="lg" className="gap-2">
-                View All Services <ArrowRight size={20} />
+
+            <div className="lg:col-span-7 relative flex justify-center">
+              <div className="w-full max-w-lg relative h-[450px]">
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={currentTestimonial}
+                    initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    exit={{ opacity: 0, scale: 1.1, rotate: 2 }}
+                    transition={{ duration: 0.5, ease: "circOut" }}
+                    className="absolute inset-0 bg-white p-12 rounded-[3.5rem] shadow-[0_40px_80px_rgba(0,0,0,0.06)] border border-slate-50 flex flex-col justify-between text-left"
+                  >
+                    <p className="text-2xl font-bold text-brand-primary leading-snug tracking-tight">
+                      "{testimonials[currentTestimonial].text.split('. ').slice(0, 3).join('. ')}..."
+                    </p>
+                    <div className="flex items-center gap-5 pt-10 border-t border-slate-50">
+                      <div className="w-14 h-14 rounded-2xl bg-brand-primary flex items-center justify-center text-white font-black text-lg">
+                        {testimonials[currentTestimonial].author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-extrabold text-brand-primary leading-none mb-1.5">{testimonials[currentTestimonial].author}</p>
+                        <p className="text-xs font-bold text-brand-muted uppercase tracking-[0.1em]">Patient Review</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+                
+                {/* Navigation Pills */}
+                <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-white/50 backdrop-blur-lg p-2 rounded-3xl border border-white/50 shadow-sm">
+                   {[0,1,2,3].map(i => (
+                     <button 
+                      key={i} 
+                      onClick={() => setCurrentTestimonial(i)}
+                      className={cn(
+                        "h-2 rounded-full transition-all duration-500",
+                        i === currentTestimonial ? "w-12 bg-brand-primary" : "w-2 bg-slate-300"
+                      )}
+                    />
+                   ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── BOLD CTA — TRANSITION ── */}
+      <section className="bg-brand-primary py-40 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10"
+          style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        
+        <div className="container-custom relative z-10 text-center space-y-12">
+          <h2 className="text-5xl sm:text-7xl font-black text-white tracking-tighter leading-[0.9]">
+            Begin your care <br />
+            <span className="text-brand-accent">journey today.</span>
+          </h2>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
+            <Link to="/appointments">
+              <Button variant="primary" size="xl" className="px-16 h-20 rounded-3xl text-xl font-black tracking-tight">
+                Schedule Online
               </Button>
             </Link>
+            <a href={`tel:${clinicInfo.contact.phone}`}>
+              <Button variant="outline" size="xl" className="px-16 h-20 rounded-3xl text-xl font-black border-white/10 text-white hover:bg-white hover:text-brand-primary transition-all">
+                Call Clinic
+              </Button>
+            </a>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {featuredServices.map(service => (
-              <ServiceCard key={service.id} service={service} />
+          
+          <div className="flex flex-wrap items-center justify-center gap-12 pt-20">
+            {['Expert Staff', 'Same-Day Visits', 'All Major Insurance'].map(item => (
+              <div key={item} className="flex items-center gap-3 text-white/50 font-black text-xs uppercase tracking-widest">
+                <Check size={16} className="text-brand-accent" /> {item}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Accepted Insurance Section - Auto Scroll */}
-      <section className="py-16 sm:py-20 bg-brand-light border-y border-brand-accent overflow-hidden">
-        <div className="container-custom mb-10 text-center">
-          <div className="h-1.5 w-20 bg-brand-secondary rounded-full mx-auto mb-4" />
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-brand-primary">Accepted Insurance</h2>
-          <p className="text-base sm:text-lg font-medium text-slate-500 mt-3">We partner with major providers to keep your care seamless.</p>
-        </div>
-        <div className="relative">
-          {(() => {
-            const plans = [
-              { name: 'Aetna', logo: '/src/assets/atena-1.png' },
-              { name: 'Texas Health', logo: '/src/assets/texax-helath.png' },
-              { name: 'BlueCross BlueShield', logo: '/src/assets/bcbs.png' },
-              { name: 'UnitedHealthcare', logo: '/src/assets/UHC2.png' },
-              { name: 'Cigna', logo: '/src/assets/Cigna.png' },
-              { name: 'Medicare', logo: '/src/assets/Medicare.png' },
-              { name: 'Humana', logo: '/src/assets/Humana.png' },
-              { name: 'First Health', logo: '/src/assets/first-health.png' },
-              { name: 'Self-Pay', logo: '/src/assets/self-pay.png' },
-            ];
-            const doubled = [...plans, ...plans];
-            return (
-              <div className="flex gap-6 animate-marquee">
-                {doubled.map((plan, i) => (
-                  <div key={i} className="inline-flex flex-col items-center justify-center px-8 py-5 bg-brand-white rounded-2xl border border-brand-accent shadow-sm min-w-[180px] flex-shrink-0 gap-2">
-                    <img src={plan.logo} alt={plan.name} className="h-12 w-auto object-contain" />
-                    <span className="text-xs font-bold text-slate-500 text-center">{plan.name}</span>
-                  </div>
-                ))}
-              </div>
-            );
-          })()}
-        </div>
-        <div className="text-center mt-8">
-          <Link to="/patient-access/insurance" className="inline-flex items-center gap-2 text-brand-secondary font-black uppercase tracking-widest text-sm hover:gap-4 transition-all">
-            View Full List <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
-
-      {/* What Our Patients Are Saying - Exact Replica Section */}
-      <section className="relative py-16 sm:py-20 overflow-hidden">
-        {/* Medical Theme Background */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80" 
-            alt="Clinic Background" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-brand-primary/95 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/50 via-transparent to-brand-primary" />
-        </div>
-
-        <div className="container-custom relative z-10">
-          <div className="text-center mb-10 space-y-3">
-            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">What Our Patients Are Saying</h2>
-            <div className="h-1.5 w-20 bg-brand-secondary rounded-full mx-auto" />
-          </div>
-
-          <div className="relative max-w-6xl mx-auto">
-            <div className="overflow-hidden rounded-[40px] py-8">
-              <div
-                className="flex transition-transform duration-1000 ease-in-out"
-                style={{ transform: `translateX(-${current * (typeof window !== 'undefined' && window.innerWidth < 1024 ? 100 : 50)}%)` }}
-              >
-                {testimonials.map((item, idx) => (
-                  <div key={idx} className="min-w-full lg:min-w-[50%] px-4 sm:px-6">
-                      <div className="relative mb-16">
-                      {/* White Card */}
-                      <div className="bg-white rounded-[28px] p-7 lg:p-8 shadow-2xl text-center relative z-20 h-full flex flex-col min-h-[280px]">
-                        <div className="flex justify-center mb-6">
-                          <Quote size={48} className="text-slate-100" fill="currentColor" />
-                        </div>
-                        <p className="text-base lg:text-base font-medium text-slate-600 leading-relaxed italic flex-grow">
-                          "{item.text}"
-                        </p>
-                        
-                        {/* Overlapping Avatar */}
-                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-white rounded-full p-1.5 shadow-xl z-30">
-                          <div className="w-full h-full rounded-full bg-brand-accent flex items-center justify-center text-brand-primary font-black text-2xl overflow-hidden border border-slate-100">
-                             {item.author.charAt(0)}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Caption Below Card */}
-                      <div className="text-center mt-12 space-y-1">
-                        <h4 className="text-lg font-black text-white">{item.author}</h4>
-                        <p className="text-sm font-bold text-brand-secondary tracking-[0.2em]">Designation</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={() => setCurrent(prev => (prev - 1 + testimonials.length) % testimonials.length)}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 w-14 h-14 bg-white/10 hover:bg-white text-white hover:text-brand-primary border border-white/20 rounded-full flex items-center justify-center transition-all z-20 backdrop-blur-sm"
-              aria-label="Previous patient story"
-            >
-              <ChevronLeft size={28} />
-            </button>
-            <button
-              onClick={() => setCurrent(prev => (prev + 1) % testimonials.length)}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 w-14 h-14 bg-white/10 hover:bg-white text-white hover:text-brand-primary border border-white/20 rounded-full flex items-center justify-center transition-all z-20 backdrop-blur-sm"
-              aria-label="Next patient story"
-            >
-              <ChevronRight size={28} />
-            </button>
-
-            {/* Pagination Dots */}
-            <div className="flex justify-center gap-3">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrent(idx)}
-                  className={`h-2.5 rounded-full transition-all duration-500 ${
-                    idx === current ? 'w-10 bg-brand-secondary shadow-[0_0_15px_rgba(0,186,211,0.5)]' : 'w-2.5 bg-white/30'
-                  }`}
-                  aria-label={`Go to testimonial group ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Counters */}
-      {/* <section className="py-20 bg-brand-primary text-brand-white">
-        <div className="container-custom grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 text-center items-center">
-          {[
-            { stat: "15+", label: "Years Experience" },
-            { stat: "5000+", label: "Happy Patients" },
-            { stat: "100%", label: "Patient Care" },
-            { stat: "16+", label: "Medical Services" }
-          ].map(counter => (
-            <div key={counter.label} className="space-y-2">
-              <span className="text-5xl lg:text-6xl font-black text-brand-secondary tabular-nums">{counter.stat}</span>
-              <p className="text-sm font-black uppercase tracking-widest text-brand-accent/60">{counter.label}</p>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
-      {/* CTA Section */}
-      <section className="section-padding bg-brand-light">
-        <div className="container-custom">
-          <div className="bg-brand-secondary rounded-[32px] sm:rounded-[40px] p-8 sm:p-12 lg:p-24 text-center text-brand-white shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none group-hover:scale-110 transition-transform duration-1000">
-              <Calendar size={320} />
-            </div>
-            <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8 relative z-10">
-              <h2 className="text-3xl sm:text-4xl lg:text-4xl font-black leading-tight tracking-tight">Need Medical Attention? <br/> Book Your Visit Today.</h2>
-              <p className="text-base sm:text-lg font-medium text-white/80 leading-relaxed">
-                We are currently accepting new patients at our Frisco location. 
-                Schedule your appointment online or call our office at <span className="font-black underline">(945) 221-6442</span>.
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-6 pt-8">
-                <Link to="/appointments">
-                  <Button size="lg" className="bg-brand-white text-brand-primary hover:bg-brand-accent w-full sm:w-auto h-14 sm:h-14 text-base sm:text-xl px-8 sm:px-8">
-                    Schedule Now
-                  </Button>
-                </Link>
-                <Link to="/contact">
-                  <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 w-full sm:w-auto h-14 sm:h-14 text-base sm:text-xl px-8 sm:px-8">
-                    Get in Touch
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

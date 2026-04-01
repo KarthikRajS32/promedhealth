@@ -11,7 +11,7 @@ import { Testimonials } from './pages/about/Testimonials';
 // Patient Access Subpages
 import { Televisit } from './pages/patient-access/Televisit';
 import { PatientPortal } from './pages/patient-access/PatientPortal';
-// import { BillPay } from './pages/patient-access/BillPay';
+import { BillPay } from './pages/patient-access/BillPay';
 import { Insurance } from './pages/patient-access/Insurance';
 
 // Services Subpages
@@ -36,7 +36,7 @@ function App() {
         {/* Patient Access Routes */}
         <Route path="/patient-access/televisit" element={<Televisit />} />
         <Route path="/patient-access/portal" element={<PatientPortal />} />
-        {/* <Route path="/patient-access/bill-pay" element={<BillPay />} /> */}
+        <Route path="/patient-access/bill-pay" element={<BillPay />} />
         <Route path="/patient-access/insurance" element={<Insurance />} />
         
         {/* Services Routes */}
