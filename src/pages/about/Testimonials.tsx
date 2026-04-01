@@ -1,5 +1,5 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
-import { testimonials, clinicInfo } from '../../data/content';
+import { testimonials } from '../../data/content';
 import { Quote, Star, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
@@ -96,33 +96,7 @@ export function Testimonials() {
         </div>
       </section>
 
-      {/* Accepted Insurance Section */}
-      {/* <section className="section-padding bg-brand-white border-y border-brand-accent">
-        <div className="container-custom">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-black text-brand-primary">Accepted Insurance</h2>
-            <p className="text-lg font-medium text-slate-500 max-w-2xl mx-auto">
-              We accept most major insurance plans and Medicare to ensure quality care is accessible to everyone.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {clinicInfo.insurancePlans.map((plan) => (
-              <div key={plan} className="p-8 bg-brand-light rounded-3xl border border-brand-accent flex items-center justify-center text-center hover:bg-brand-white hover:shadow-xl transition-all group">
-                <span className="text-lg font-black text-brand-primary group-hover:text-brand-secondary transition-colors decoration-brand-secondary/30 underline-offset-4">
-                  {plan}
-                </span>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-12 p-8 bg-brand-accent/30 rounded-3xl border border-brand-accent text-center">
-            <p className="text-brand-primary font-bold">
-              Don't see your plan? <Link to="/contact" className="text-brand-secondary underline underline-offset-4 hover:text-brand-primary transition-colors">Contact us</Link> to verify coverage or discuss self-pay options.
-            </p>
-          </div>
-        </div>
-      </section> */}
+      
 
       {/* Call to Action */}
       <section className="section-padding bg-brand-white">
