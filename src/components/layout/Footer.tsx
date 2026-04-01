@@ -42,7 +42,7 @@ export function Footer() {
           <div className="space-y-8 lg:col-span-1">
             <Link to="/" className="flex items-center gap-3">
               <img
-                src="/src/assets/promed-logo.png"
+                src="/images/promed-logo.png"
                 alt="ProMed Health"
                 className="h-18 lg:h-18 w-auto object-contain brightness-0 invert"
               />

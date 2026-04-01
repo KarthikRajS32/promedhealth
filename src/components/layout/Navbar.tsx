@@ -81,7 +81,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <img
-              src="/src/assets/promed-logo.png"
+              src="/images/promed-logo.png"
               alt="ProMed Health"
               className="h-14 lg:h-16 w-auto object-contain"
             />

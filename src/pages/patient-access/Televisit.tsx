@@ -1,6 +1,6 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
 import { clinicInfo } from '../../data/content';
-import { Smartphone, CheckCircle, ShieldCheck, Globe, Monitor } from 'lucide-react';
+import { CheckCircle, ShieldCheck, Globe, Monitor } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 
 export function Televisit() {
@@ -22,7 +22,7 @@ export function Televisit() {
             <div className="relative group">
                <div className="aspect-[6/5] max-w-sm mx-auto rounded-[40px] overflow-hidden bg-brand-accent border-[6px] border-brand-white shadow-2xl relative group-hover:rotate-0 transition-transform duration-700">
                   <a href="https://www.youtube.com/watch?v=HFrR3D2BMaQ">
-                     <img src="/src/assets/join-televisit-landing.png" alt="Televisit" className="w-full h-full object-cover cursor-pointer" />
+                     <img src="/images/join-televisit-landing.png" alt="Televisit" className="w-full h-full object-cover cursor-pointer" />
                   </a>
                </div>
                

@@ -1,0 +1,3 @@
+﻿src/pages/patient-access/Insurance.tsx(2,1): error TS6133: 'clinicInfo' is declared but its value is never read.
+src/pages/patient-access/Insurance.tsx(3,1): error TS6192: All imports in import declaration are unused.
+src/pages/patient-access/Televisit.tsx(3,10): error TS6133: 'Smartphone' is declared but its value is never read.

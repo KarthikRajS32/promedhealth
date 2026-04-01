@@ -1,6 +1,6 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
 import { testimonials, clinicInfo } from '../../data/content';
-import { Quote, Star, ArrowRight, CheckCircle } from 'lucide-react';
+import { Quote, Star, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
 
@@ -30,43 +30,74 @@ export function Testimonials() {
         </div>
       </section>
 
-      {/* Testimonials Grid */}
-      <section className="section-padding bg-brand-light relative overflow-hidden">
-         {/* Background Shapes */}
-         <div className="absolute top-0 right-0 -z-10 w-1/3 h-full bg-brand-accent/30 blur-3xl opacity-50" />
-         <div className="absolute bottom-0 left-0 -z-10 w-1/4 h-1/2 bg-brand-secondary/5 blur-2xl opacity-50" />
-
+      {/* Testimonials — masonry columns, natural card heights */}
+      <section className="section-padding bg-brand-warm">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {testimonials.map((item, idx) => (
-              <div key={idx} className="group relative p-10 bg-brand-white rounded-[40px] border border-brand-accent shadow-sm transition-all duration-500 hover:shadow-2xl hover:shadow-brand-primary/5 hover:-translate-y-2">
-                <div className="absolute top-8 left-10 text-brand-accent/30 group-hover:text-brand-secondary/20 transition-colors">
-                  <Quote size={64} strokeWidth={3} />
-                </div>
-                
-                <div className="relative z-10 space-y-8 h-full flex flex-col">
-                  <p className="text-lg font-medium text-slate-600 leading-relaxed flex-grow">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+            {testimonials.map((item, idx) => {
+              const isFeatured = idx === 0 || idx === 3;
+              const isAccent = idx === 2;
+              return (
+                <div
+                  key={idx}
+                  className={`break-inside-avoid mb-5 flex flex-col gap-4 rounded-xl border p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group ${
+                    isFeatured
+                      ? 'bg-brand-primary border-brand-primary'
+                      : isAccent
+                      ? 'bg-brand-secondary border-brand-secondary'
+                      : 'bg-white border-slate-100 hover:border-brand-secondary/30'
+                  }`}
+                >
+                  {/* quote */}
+                  <div className="flex items-center justify-between">
+                  
+                    <Quote
+                      size={20}
+                      className={`transition-all duration-300 ${
+                        isFeatured
+                          ? 'text-white/15 group-hover:text-white/50 group-hover:scale-110'
+                          : isAccent
+                          ? 'text-white/20 group-hover:text-white/60 group-hover:scale-110'
+                          : 'text-slate-100 group-hover:text-brand-secondary group-hover:scale-110'
+                      }`}
+                      fill="currentColor"
+                    />
+                  </div>
+
+                  {/* Full review — no truncation, no min-height */}
+                  <p className={`text-sm leading-relaxed ${
+                    isFeatured || isAccent ? 'text-white/75' : 'text-slate-500'
+                  }`}>
                     "{item.text}"
                   </p>
-                  
-                  <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
-                    <div>
-                      <h4 className="text-xl font-black text-brand-primary">{item.author}</h4>
-                      <p className="text-xs font-bold text-slate-400 tracking-widest mt-1">Designation</p>
+
+                  {/* Author */}
+                  <div className={`flex items-center gap-3 pt-3 border-t ${
+                    isFeatured ? 'border-white/10' : isAccent ? 'border-white/20' : 'border-slate-100'
+                  }`}>
+                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center font-semibold text-sm shrink-0 ${
+                      isFeatured ? 'bg-brand-secondary text-white' : isAccent ? 'bg-white text-brand-secondary' : 'bg-brand-primary text-white'
+                    }`}>
+                      {item.author.charAt(0)}
                     </div>
-                    <div className="w-10 h-10 bg-brand-accent rounded-full flex items-center justify-center text-brand-secondary group-hover:bg-brand-primary group-hover:text-brand-white transition-colors">
-                      <CheckCircle size={18} />
+                    <div>
+                      <p className={`text-sm font-semibold ${
+                        isFeatured || isAccent ? 'text-white' : 'text-brand-primary'
+                      }`}>{item.author}</p>
+                      <p className={`text-xs ${
+                        isFeatured || isAccent ? 'text-white/40' : 'text-slate-400'
+                      }`}>Designation</p>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Accepted Insurance Section */}
-      <section className="section-padding bg-brand-white border-y border-brand-accent">
+      {/* <section className="section-padding bg-brand-white border-y border-brand-accent">
         <div className="container-custom">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-black text-brand-primary">Accepted Insurance</h2>
@@ -91,7 +122,7 @@ export function Testimonials() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Call to Action */}
       <section className="section-padding bg-brand-white">

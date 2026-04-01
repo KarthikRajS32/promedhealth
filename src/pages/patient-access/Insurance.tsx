@@ -1,6 +1,4 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
-import { clinicInfo } from '../../data/content';
-import { CheckCircle, AlertCircle } from 'lucide-react';
 
 export function Insurance() {
   return (
@@ -25,15 +23,15 @@ export function Insurance() {
               {/* Insurance Grid */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  { name: 'Aetna', logo: '/src/assets/atena-1.png' },
-                  { name: 'Texas Health', logo: '/src/assets/texax-helath.png' },
-                  { name: 'BlueCross BlueShield', logo: '/src/assets/bcbs.png' },
-                  { name: 'UnitedHealthcare', logo: '/src/assets/UHC2.png' },
-                  { name: 'Cigna', logo: '/src/assets/Cigna.png' },
-                  { name: 'Medicare', logo: '/src/assets/Medicare.png' },
-                  { name: 'Humana', logo: '/src/assets/Humana.png' },
-                  { name: 'First Health', logo: '/src/assets/first-health.png' },
-                  { name: 'Self-Pay', logo: '/src/assets/self-pay.png' },
+                  { name: 'Aetna', logo: '/images/atena-1.png' },
+                  { name: 'Texas Health', logo: '/images/texax-helath.png' },
+                  { name: 'BlueCross BlueShield', logo: '/images/bcbs.png' },
+                  { name: 'UnitedHealthcare', logo: '/images/UHC2.png' },
+                  { name: 'Cigna', logo: '/images/Cigna.png' },
+                  { name: 'Medicare', logo: '/images/Medicare.png' },
+                  { name: 'Humana', logo: '/images/Humana.png' },
+                  { name: 'First Health', logo: '/images/first-health.png' },
+                  { name: 'Self-Pay', logo: '/images/self-pay.png' },
                 ].map((plan, idx) => (
                   <div key={idx} className="relative bg-brand-white rounded-[28px] border border-brand-accent shadow-md hover:shadow-xl hover:-translate-y-2 hover:border-brand-secondary/50 transition-all duration-300 group overflow-hidden">
                     <div className="h-1.5 bg-gradient-to-r from-brand-primary to-brand-secondary" />

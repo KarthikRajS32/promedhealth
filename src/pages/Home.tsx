@@ -60,7 +60,7 @@ export function Home() {
             <div className="relative group mt-8 lg:mt-0">
               <div className="aspect-[5/6] sm:aspect-[3/4]  max-w-[280px] sm:max-w-sm mx-auto rounded-[32px] overflow-hidden bg-brand-accent border-[8px] sm:border-[12px] border-brand-white/10 shadow-2xl relative rotate-2 group-hover:rotate-0 transition-transform duration-700">
                 <div className="absolute inset-0 bg-brand-secondary/20 mix-blend-overlay" />
-                <img src="/src/assets/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
+                <img src="/images/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
               </div>
               
               {/* Floating Stat Card */}
@@ -131,15 +131,15 @@ export function Home() {
         <div className="relative">
           {(() => {
             const plans = [
-              { name: 'Aetna', logo: '/src/assets/atena-1.png' },
-              { name: 'Texas Health', logo: '/src/assets/texax-helath.png' },
-              { name: 'BlueCross BlueShield', logo: '/src/assets/bcbs.png' },
-              { name: 'UnitedHealthcare', logo: '/src/assets/UHC2.png' },
-              { name: 'Cigna', logo: '/src/assets/Cigna.png' },
-              { name: 'Medicare', logo: '/src/assets/Medicare.png' },
-              { name: 'Humana', logo: '/src/assets/Humana.png' },
-              { name: 'First Health', logo: '/src/assets/first-health.png' },
-              { name: 'Self-Pay', logo: '/src/assets/self-pay.png' },
+              { name: 'Aetna', logo: '/images/atena-1.png' },
+              { name: 'Texas Health', logo: '/images/texax-helath.png' },
+              { name: 'BlueCross BlueShield', logo: '/images/bcbs.png' },
+              { name: 'UnitedHealthcare', logo: '/images/UHC2.png' },
+              { name: 'Cigna', logo: '/images/Cigna.png' },
+              { name: 'Medicare', logo: '/images/Medicare.png' },
+              { name: 'Humana', logo: '/images/Humana.png' },
+              { name: 'First Health', logo: '/images/first-health.png' },
+              { name: 'Self-Pay', logo: '/images/self-pay.png' },
             ];
             const doubled = [...plans, ...plans];
             return (
