@@ -32,7 +32,7 @@ export function Layout({ children }: LayoutProps) {
             }
           });
         },
-        { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+        { threshold: 0, rootMargin: '0px' }
       );
 
       elements.forEach(el => observer.observe(el));
