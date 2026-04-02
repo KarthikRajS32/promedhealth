@@ -107,8 +107,8 @@ export function Testimonials() {
              </div>
              
              <div className="max-w-3xl mx-auto text-center space-y-10 relative z-10">
-                <h2 className="text-3xl lg:text-5xl font-black text-brand-white leading-tight tracking-tight">Your Health Deserves <br/> Exceptional Care.</h2>
-                <p className="text-lg font-medium text-brand-accent/80 leading-relaxed">
+                <h2 className="text-3xl lg:text-4xl font-black text-brand-white leading-tight tracking-tight">Your Health Deserves <br/> Exceptional Care.</h2>
+                <p className="text-md font-medium text-brand-accent/80 leading-relaxed">
                   Join our community of healthy, satisfied patients. We're currently accepting new patients at our Frisco location.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-6">

@@ -3,6 +3,7 @@ import { Phone, MapPin, ArrowRight, Clock } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { clinicInfo } from '../../data/content';
 import { services } from '../../data/services';
+import { promedLogo } from '../../assets';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -42,7 +43,7 @@ export function Footer() {
           <div className="space-y-8 lg:col-span-1">
             <Link to="/" className="flex items-center gap-3">
               <img
-                src="/images/promed-logo.png"
+                src={promedLogo}
                 alt="ProMed Health"
                 className="h-18 lg:h-18 w-auto object-contain brightness-0 invert"
               />

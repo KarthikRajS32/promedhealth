@@ -1,7 +1,8 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
 import { clinicInfo } from '../../data/content';
-import { CheckCircle, ShieldCheck, Globe, Monitor } from 'lucide-react';
+import { CheckCircle, ShieldCheck, Globe, Monitor, Play } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
+import { joinTelevisit } from '../../assets';
 
 export function Televisit() {
   return (
@@ -20,12 +21,28 @@ export function Televisit() {
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Illustration / Image Column */}
             <div className="relative group">
-               <div className="aspect-[6/5] max-w-sm mx-auto rounded-[40px] overflow-hidden bg-brand-accent border-[6px] border-brand-white shadow-2xl relative group-hover:rotate-0 transition-transform duration-700">
-                  <a href="https://www.youtube.com/watch?v=HFrR3D2BMaQ">
-                     <img src="/images/join-televisit-landing.png" alt="Televisit" className="w-full h-full object-cover cursor-pointer" />
-                  </a>
-               </div>
-               
+               <a
+                  href="https://www.youtube.com/watch?v=HFrR3D2BMaQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block aspect-[7/5] max-w-xl mx-auto rounded-[40px] overflow-hidden border-[6px] border-brand-white shadow-2xl relative"
+               >
+                  <img
+                     src={joinTelevisit}
+                     alt="Televisit"
+                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* dark overlay on hover */}
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* play button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                     <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl
+                        scale-90 opacity-0 group-hover:scale-100 group-hover:opacity-100
+                        transition-all duration-300">
+                        <Play size={24} className="text-brand-primary ml-1" fill="currentColor" />
+                     </div>
+                  </div>
+               </a>
             </div>
 
             {/* Content Column */}

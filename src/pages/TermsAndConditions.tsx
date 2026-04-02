@@ -22,7 +22,7 @@ export function TermsAndConditions() {
               <div className="h-1.5 w-20 bg-brand-secondary rounded-full" />
               <h2 className="text-3xl lg:text-5xl font-black text-brand-primary tracking-tight">Terms of Use</h2>
               <p className="text-lg lg:text-xl font-medium text-slate-600 leading-relaxed">
-                Welcome to ProMed Health Primary Care website (“promedhealthmd.com”). By accessing or using 
+                Welcome to ProMed Health Primary Care website. By accessing or using 
                 this Site, you agree to comply with and be bound by these Terms & Conditions. Please read 
                 these Terms carefully before using the Site.
               </p>

@@ -1,6 +1,6 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
 import { clinicInfo } from '../../data/content';
-import { MapPin, Phone, Mail, Navigation, Building2, ShieldCheck, Heart, ArrowRight } from 'lucide-react';
+import { MapPin, Phone, Mail, Navigation, Building2, ShieldCheck, Heart, ArrowRight, Clock } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { Link } from 'react-router-dom';
 
@@ -23,8 +23,8 @@ export function FriscoLocation() {
               <div className="space-y-12">
                  <div className="space-y-6">
                     <div className="h-1.5 w-20 bg-brand-secondary rounded-full" />
-                    <h2 className="text-4xl lg:text-7xl font-black text-brand-primary tracking-tight">Our Main <br/> Clinical Hub</h2>
-                    <p className="text-xl font-medium text-slate-600 leading-relaxed max-w-xl">
+                    <h2 className="text-4xl lg:text-5xl font-black text-brand-primary tracking-tight">Our Main <br/> Clinical Hub</h2>
+                    <p className="text-lg font-medium text-slate-600 leading-relaxed max-w-xl">
                        Our Frisco office offers a modern, comfortable environment for 
                        all your primary care needs, equipped with advanced clinical technology 
                        and led by Dr. Kavitha Ilayaraja, MD.
@@ -48,50 +48,76 @@ export function FriscoLocation() {
                     ))}
                  </div>
 
-                 <div className="p-10 bg-brand-primary rounded-[40px] text-brand-white shadow-xl shadow-brand-primary/10">
-                    <div className="grid sm:grid-cols-2 gap-12">
-                       <div className="space-y-6">
-                          <h4 className="text-xl font-black tracking-widest uppercase">Office Hours</h4>
-                          <ul className="space-y-3">
-                             {clinicInfo.contact.hours.map((hour, idx) => (
-                                <li key={idx} className="flex justify-between text-sm font-bold">
-                                   <span className="text-brand-accent/60">{hour.days}</span>
-                                   <span>{hour.time}</span>
-                                </li>
-                             ))}
-                          </ul>
-                       </div>
-                       <div className="space-y-6 lg:border-l lg:border-white/10 lg:pl-10">
-                          <h4 className="text-xl font-black tracking-widest uppercase">Contact Direct</h4>
-                          <div className="space-y-4">
-                             <a href={`tel:${clinicInfo.contact.phone}`} className="flex items-center gap-3 text-brand-secondary font-black text-lg hover:underline transition-all">
-                                <Phone size={20} /> {clinicInfo.contact.phone}
-                             </a>
-                             <a href={`mailto:${clinicInfo.contact.email}`} className="flex items-center gap-3 text-brand-accent hover:text-white transition-colors">
-                                <Mail size={18} /> {clinicInfo.contact.email}
-                             </a>
+                 <div className="bg-brand-primary rounded-[40px] text-brand-white shadow-xl shadow-brand-primary/10 overflow-hidden">
+                    {/* Office Hours */}
+                    <div className="p-8 space-y-4">
+                       <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
+                             <Clock size={16} className="text-brand-secondary" />
                           </div>
+                          <h4 className="text-sm font-black tracking-widest uppercase text-white/60">Office Hours</h4>
                        </div>
+                       <ul className="space-y-3">
+                          {clinicInfo.contact.hours.map((hour, idx) => (
+                             <li key={idx} className="flex items-center justify-between py-3 border-b border-white/10 last:border-0">
+                                <span className="text-sm font-medium text-white/60">{hour.days}</span>
+                                <span className={`text-sm font-bold px-3 py-1 rounded-full ${
+                                   hour.time === 'Closed'
+                                      ? 'bg-white/10 text-white/40'
+                                      : 'bg-brand-secondary/20 text-brand-secondary'
+                                }`}>{hour.time}</span>
+                             </li>
+                          ))}
+                       </ul>
+                    </div>
+
+                    {/* Contact Direct */}
+                    <div className="p-8 space-y-4 border-t border-white/10">
+                       <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
+                             <Phone size={16} className="text-brand-secondary" />
+                          </div>
+                          <h4 className="text-sm font-black tracking-widest uppercase text-white/60">Contact Direct</h4>
+                       </div>
+                       <a href={`tel:${clinicInfo.contact.phone}`}
+                          className="flex items-center gap-3 p-4 bg-white/5 hover:bg-white/10 rounded-2xl transition-colors group">
+                          <div className="w-9 h-9 bg-brand-secondary/20 rounded-xl flex items-center justify-center shrink-0">
+                             <Phone size={16} className="text-brand-secondary" />
+                          </div>
+                          <div>
+                             <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Phone</p>
+                             <p className="text-sm font-bold text-white group-hover:text-brand-secondary transition-colors">{clinicInfo.contact.phone}</p>
+                          </div>
+                       </a>
+                       <a href={`mailto:${clinicInfo.contact.email}`}
+                          className="flex items-center gap-3 p-4 bg-white/5 hover:bg-white/10 rounded-2xl transition-colors group">
+                          <div className="w-9 h-9 bg-brand-secondary/20 rounded-xl flex items-center justify-center shrink-0">
+                             <Mail size={16} className="text-brand-secondary" />
+                          </div>
+                          <div>
+                             <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Email</p>
+                             <p className="text-sm font-bold text-white group-hover:text-brand-secondary transition-colors">{clinicInfo.contact.email}</p>
+                          </div>
+                       </a>
                     </div>
                  </div>
               </div>
 
               {/* Map & Nav Column */}
               <div className="space-y-10 lg:sticky lg:top-32">
-                 {/* Map Placeholder */}
-                 <div className="aspect-square w-full rounded-[48px] overflow-hidden bg-slate-100 border-[16px] border-brand-accent shadow-2xl relative group">
-                    <div className="absolute inset-0 bg-brand-secondary/5 opacity-50 mix-blend-overlay" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center space-y-4">
-                       <div className="w-20 h-20 bg-brand-white rounded-3xl flex items-center justify-center text-brand-primary shadow-xl group-hover:scale-110 transition-transform">
-                          <MapPin size={40} />
-                       </div>
-                       <div className="space-y-2">
-                          <h3 className="text-2xl font-black text-brand-primary">Interactive Map</h3>
-                          <p className="text-sm font-bold text-slate-400">Placeholder for Google Maps API</p>
-                       </div>
-                    </div>
-                    
-                    <a 
+                 {/* Interactive Map */}
+                 <div className="aspect-square w-full rounded-[48px] overflow-hidden border-[16px] border-brand-accent shadow-2xl relative group">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.670356763442!2d-96.7562854!3d33.1558235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c3c393bc3075f%3A0xc6cb1c7df8b64e0!2s11691%20Independence%20Pkwy%20%23110%2C%20Frisco%2C%20TX%2075035!5e0!3m2!1sen!2sus!4v1711894000000!5m2!1sen!2sus"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="ProMed Health Frisco Location"
+                    />
+                    <a
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(clinicInfo.contact.address.street + " " + clinicInfo.contact.address.city)}`}
                       target="_blank"
                       rel="noopener noreferrer"

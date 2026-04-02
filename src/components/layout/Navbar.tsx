@@ -5,12 +5,18 @@ import { clinicInfo } from '../../data/content';
 import { services } from '../../data/services';
 import { cn } from '../../lib/utils';
 import { Button } from '../ui/Button';
+import { promedLogo } from '../../assets';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
+
+  const isLinkActive = (link: { path: string; subLinks?: { path: string }[] }) => {
+    if (link.subLinks) return link.subLinks.some(s => !('external' in s && s.external) && location.pathname.startsWith(s.path));
+    return link.path === '/' ? location.pathname === '/' : location.pathname.startsWith(link.path);
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40);
@@ -81,7 +87,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <img
-              src="/images/promed-logo.png"
+              src={promedLogo}
               alt="ProMed Health"
               className="h-14 lg:h-16 w-auto object-contain"
             />
@@ -94,23 +100,29 @@ export function Navbar() {
                 {link.subLinks ? (
                   <button
                     className={cn(
-                      "px-4 py-2 text-[15px] font-bold text-slate-600 hover:text-brand-primary flex items-center gap-1 transition-colors",
-                      activeDropdown === link.name && "text-brand-primary"
+                      "relative px-4 py-2 text-[15px] font-bold flex items-center gap-1 transition-colors",
+                      isLinkActive(link) ? "text-brand-primary" : "text-slate-600 hover:text-brand-primary"
                     )}
                     onMouseEnter={() => setActiveDropdown(link.name)}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
                     {link.name} <ChevronDown size={14} className={cn("transition-transform", activeDropdown === link.name && "rotate-180")} />
+                    {isLinkActive(link) && <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-brand-primary rounded-full" />}
                   </button>
                 ) : (
                   <NavLink
                     to={link.path}
                     className={({ isActive }) => cn(
-                      "px-4 py-2 text-[15px] font-bold transition-colors",
+                      "relative px-4 py-2 text-[15px] font-bold transition-colors block",
                       isActive ? "text-brand-primary" : "text-slate-600 hover:text-brand-primary"
                     )}
                   >
-                    {link.name}
+                    {({ isActive }) => (
+                      <>
+                        {link.name}
+                        {isActive && <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-brand-primary rounded-full" />}
+                      </>
+                    )}
                   </NavLink>
                 )}
 
@@ -181,7 +193,10 @@ export function Navbar() {
                 {link.subLinks ? (
                   <div className="py-4">
                     <button
-                      className="flex items-center justify-between w-full text-lg font-black text-brand-primary"
+                      className={cn(
+                        "flex items-center justify-between w-full text-lg font-black",
+                        isLinkActive(link) ? "text-brand-secondary" : "text-brand-primary"
+                      )}
                       onClick={() => setActiveDropdown(activeDropdown === link.name ? null : link.name)}
                     >
                       {link.name} <ChevronDown size={20} className={cn("transition-transform", activeDropdown === link.name && "rotate-180")} />
@@ -204,7 +219,13 @@ export function Navbar() {
                     </div>
                   </div>
                 ) : (
-                  <Link to={link.path} className="block py-4 text-lg font-black text-brand-primary">
+                  <Link
+                    to={link.path}
+                    className={cn(
+                      "block py-4 text-lg font-black",
+                      isLinkActive(link) ? "text-brand-secondary" : "text-brand-primary"
+                    )}
+                  >
                     {link.name}
                   </Link>
                 )}

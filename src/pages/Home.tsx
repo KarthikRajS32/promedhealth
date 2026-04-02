@@ -5,6 +5,7 @@ import { services } from '../data/services';
 import { clinicInfo, testimonials } from '../data/content';
 import { Button } from '../components/ui/Button';
 import { ServiceCard } from '../components/ui/ServiceCard';
+import { kavithaPhoto, aetna, texasHealth, bcbs, uhc, cigna, medicare, humana, firstHealth, selfPay } from '../assets';
 
 export function Home() {
   const featuredServices = services.slice(0, 6);
@@ -60,7 +61,7 @@ export function Home() {
             <div className="relative group mt-8 lg:mt-0">
               <div className="aspect-[5/6] sm:aspect-[3/4]  max-w-[280px] sm:max-w-sm mx-auto rounded-[32px] overflow-hidden bg-brand-accent border-[8px] sm:border-[12px] border-brand-white/10 shadow-2xl relative rotate-2 group-hover:rotate-0 transition-transform duration-700">
                 <div className="absolute inset-0 bg-brand-secondary/20 mix-blend-overlay" />
-                <img src="/images/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
+                <img src={kavithaPhoto} alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
               </div>
               
               {/* Floating Stat Card */}
@@ -131,15 +132,15 @@ export function Home() {
         <div className="relative">
           {(() => {
             const plans = [
-              { name: 'Aetna', logo: '/images/atena-1.png' },
-              { name: 'Texas Health', logo: '/images/texax-helath.png' },
-              { name: 'BlueCross BlueShield', logo: '/images/bcbs.png' },
-              { name: 'UnitedHealthcare', logo: '/images/UHC2.png' },
-              { name: 'Cigna', logo: '/images/Cigna.png' },
-              { name: 'Medicare', logo: '/images/Medicare.png' },
-              { name: 'Humana', logo: '/images/Humana.png' },
-              { name: 'First Health', logo: '/images/first-health.png' },
-              { name: 'Self-Pay', logo: '/images/self-pay.png' },
+              { name: 'Aetna', logo: aetna },
+              { name: 'Texas Health', logo: texasHealth },
+              { name: 'BlueCross BlueShield', logo: bcbs },
+              { name: 'UnitedHealthcare', logo: uhc },
+              { name: 'Cigna', logo: cigna },
+              { name: 'Medicare', logo: medicare },
+              { name: 'Humana', logo: humana },
+              { name: 'First Health', logo: firstHealth },
+              { name: 'Self-Pay', logo: selfPay },
             ];
             const doubled = [...plans, ...plans];
             return (

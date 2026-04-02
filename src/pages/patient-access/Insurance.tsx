@@ -1,4 +1,5 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
+import { aetna, texasHealth, bcbs, uhc, cigna, medicare, humana, firstHealth, selfPay } from '../../assets';
 
 export function Insurance() {
   return (
@@ -18,20 +19,21 @@ export function Insurance() {
               <div className="space-y-6 text-center">
                  <div className="h-1.5 w-20 bg-brand-secondary rounded-full mx-auto" />
                  <h2 className="text-4xl lg:text-5xl font-black text-brand-primary">Accepted Insurance</h2>
+                 <p>Please contact us for any insurance questions.</p>
               </div>
 
               {/* Insurance Grid */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  { name: 'Aetna', logo: '/images/atena-1.png' },
-                  { name: 'Texas Health', logo: '/images/texax-helath.png' },
-                  { name: 'BlueCross BlueShield', logo: '/images/bcbs.png' },
-                  { name: 'UnitedHealthcare', logo: '/images/UHC2.png' },
-                  { name: 'Cigna', logo: '/images/Cigna.png' },
-                  { name: 'Medicare', logo: '/images/Medicare.png' },
-                  { name: 'Humana', logo: '/images/Humana.png' },
-                  { name: 'First Health', logo: '/images/first-health.png' },
-                  { name: 'Self-Pay', logo: '/images/self-pay.png' },
+                  { name: 'Aetna', logo: aetna },
+                  { name: 'Texas Health', logo: texasHealth },
+                  { name: 'BlueCross BlueShield', logo: bcbs },
+                  { name: 'UnitedHealthcare', logo: uhc },
+                  { name: 'Cigna', logo: cigna },
+                  { name: 'Medicare', logo: medicare },
+                  { name: 'Humana', logo: humana },
+                  { name: 'First Health', logo: firstHealth },
+                  { name: 'Self-Pay', logo: selfPay },
                 ].map((plan, idx) => (
                   <div key={idx} className="relative bg-brand-white rounded-[28px] border border-brand-accent shadow-md hover:shadow-xl hover:-translate-y-2 hover:border-brand-secondary/50 transition-all duration-300 group overflow-hidden">
                     <div className="h-1.5 bg-gradient-to-r from-brand-primary to-brand-secondary" />

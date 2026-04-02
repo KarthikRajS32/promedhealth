@@ -1,6 +1,7 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
 import { physicians } from '../../data/physicians';
 import { ShieldCheck, Award, BookOpen, Heart, GraduationCap, CheckCircle } from 'lucide-react';
+import { kavithaPhoto } from '../../assets';
 
 export function Physicians() {
   const dr = physicians[0]; // Dr. Kavitha Ilayaraja
@@ -22,7 +23,7 @@ export function Physicians() {
             {/* Image Column */}
             <div className="relative group flex flex-col gap-6">
               <div className="aspect-[3/4] max-w-xs mx-auto rounded-[40px] overflow-hidden bg-brand-accent border-[12px] border-brand-white shadow-2xl relative z-10 transition-transform duration-700 group-hover:scale-[1.02]">
-                <img src="/images/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
+                <img src={kavithaPhoto} alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
               </div>
               <p className="text-[15px] font-medium text-slate-600 leading-relaxed">
                 Internal medicine-trained primary care physicians like Dr. Ilay possess a deep understanding of adult health and are skilled in managing a wide range of medical conditions, from common ailments to complex diseases. By choosing Dr. Ilay as your primary care provider, you'll receive comprehensive, personalized care focused on preventive health, early detection, and effective management of chronic conditions. Patients benefit from her extensive experience and holistic approach to healthcare. Experience the difference with Dr. Kavitha Ilayaraja as your trusted healthcare partner.
