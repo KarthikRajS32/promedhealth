@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { services } from '../data/services';
 import { clinicInfo, testimonials } from '../data/content';
 import { ServiceCard } from '../components/ui/ServiceCard';
+import { aetna, texasHealth, bcbs, uhc, cigna, medicare, humana, firstHealth, selfPay, kavithaPhoto, doctorTeam } from '../assets';
 
 export function Home() {
   const featuredServices = services.slice(0, 6);
@@ -16,15 +17,15 @@ export function Home() {
   }, []);
 
   const plans = [
-    { name: 'Aetna', logo: '/images/atena-1.png' },
-    { name: 'Texas Health', logo: '/images/texax-helath.png' },
-    { name: 'BlueCross BlueShield', logo: '/images/bcbs.png' },
-    { name: 'UnitedHealthcare', logo: '/images/UHC2.png' },
-    { name: 'Cigna', logo: '/images/Cigna.png' },
-    { name: 'Medicare', logo: '/images/Medicare.png' },
-    { name: 'Humana', logo: '/images/Humana.png' },
-    { name: 'First Health', logo: '/images/first-health.png' },
-    { name: 'Self-Pay', logo: '/images/self-pay.png' },
+    { name: 'Aetna', logo: aetna },
+    { name: 'Texas Health', logo: texasHealth },
+    { name: 'BlueCross BlueShield', logo: bcbs },
+    { name: 'UnitedHealthcare', logo: uhc },
+    { name: 'Cigna', logo: cigna },
+    { name: 'Medicare', logo: medicare },
+    { name: 'Humana', logo: humana },
+    { name: 'First Health', logo: firstHealth },
+    { name: 'Self-Pay', logo: selfPay },
   ];
 
   const fadeUp = {
@@ -61,7 +62,7 @@ export function Home() {
           className="lg:w-1/2 h-80 lg:h-auto relative overflow-hidden"
         >
           <img
-            src="/images/doctor-team.png"
+            src={doctorTeam}
             alt="ProMed Health Modern Clinic Interior"
             className="w-full h-full object-cover"
           />
@@ -169,7 +170,7 @@ export function Home() {
               className="relative"
             >
               <div className="aspect-[4/5] max-w-sm mx-auto lg:mx-0 overflow-hidden rounded-md">
-                <img src="/images/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
+                <img src={kavithaPhoto} alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
               </div>
               
             </motion.div>

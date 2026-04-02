@@ -3,6 +3,7 @@ import { SectionBanner } from '../../components/ui/SectionBanner';
 import { physicians } from '../../data/physicians';
 import { ShieldCheck, Award, GraduationCap, CheckCircle, Heart, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { kavithaPhoto } from '../../assets';
 
 export function Physicians() {
   const dr = physicians[0];
@@ -47,7 +48,7 @@ export function Physicians() {
               className="flex flex-col gap-6"
             >
               <div className="max-w-sm mx-auto lg:mx-0 aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border border-slate-100">
-                <img src="/images/kavitha-photo.png" alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
+                <img src={kavithaPhoto} alt="Dr. Kavitha Ilayaraja" className="w-full h-full object-cover" />
               </div>
             
             </motion.div>

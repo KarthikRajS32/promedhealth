@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { SectionBanner } from '../../components/ui/SectionBanner';
 import { clinicInfo } from '../../data/content';
 import { Monitor, ShieldCheck, Globe, Smartphone, CheckCircle, Play } from 'lucide-react';
+import { joinTelevisit } from '../../assets';
 
 export function Televisit() {
   const fadeUp = {
@@ -43,7 +44,7 @@ export function Televisit() {
             >
               <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-100">
                 <a href="https://www.youtube.com/watch?v=HFrR3D2BMaQ" target="_blank" rel="noopener noreferrer" className="relative block group">
-                  <img src="/images/join-televisit-landing.png" alt="Televisit" className="w-full object-cover" />
+                  <img src={joinTelevisit} alt="Televisit" className="w-full object-cover" />
                   <div className="absolute inset-0 bg-brand-primary/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg">
                       <Play size={20} className="text-brand-primary ml-1" fill="currentColor" />

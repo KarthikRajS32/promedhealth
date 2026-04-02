@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { SectionBanner } from '../components/ui/SectionBanner';
 import { clinicInfo } from '../data/content';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
@@ -14,19 +13,7 @@ export function Contact() {
     setTimeout(() => setSubmitted(false), 5000);
   };
 
-  const slideLeft = {
-    initial: { opacity: 0, x: -30 },
-    whileInView: { opacity: 1, x: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 }
-  };
-
-  const slideRight = {
-    initial: { opacity: 0, x: 30 },
-    whileInView: { opacity: 1, x: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 }
-  };
+  const inputCls = "w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm text-brand-primary focus:outline-none focus:border-brand-secondary transition-colors";
 
   return (
     <div className="flex flex-col">
@@ -38,14 +25,11 @@ export function Contact() {
 
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
 
             {/* Info panel */}
-            <motion.div 
-              {...slideLeft}
-              className="space-y-6"
-            >
-              <div className="space-y-2">
+            <div className="space-y-5">
+              <div className="space-y-1">
                 <p className="text-xs font-semibold text-brand-secondary uppercase tracking-widest">Get In Touch</p>
                 <h2 className="text-2xl font-bold text-brand-primary">We're Here to Help</h2>
                 <p className="text-sm text-slate-500 leading-relaxed">Reach out for appointments, general questions, or any assistance you need.</p>
@@ -53,10 +37,10 @@ export function Contact() {
 
               <div className="space-y-3">
                 {[
-                  { icon: Phone, label: 'Phone', value: clinicInfo.contact.phone, href: `tel:${clinicInfo.contact.phone}` },
-                  { icon: Mail, label: 'Email', value: clinicInfo.contact.email, href: `mailto:${clinicInfo.contact.email}` },
-                  { icon: MapPin, label: 'Address', value: `${clinicInfo.contact.address.street}, ${clinicInfo.contact.address.city}, TX ${clinicInfo.contact.address.zip}`, href: undefined },
-                  { icon: Clock, label: 'Hours', value: 'Mon – Fri: 8:00 AM – 5:00 PM', href: undefined },
+                  { icon: Phone,  label: 'Phone',   value: clinicInfo.contact.phone, href: `tel:${clinicInfo.contact.phone}` },
+                  { icon: Mail,   label: 'Email',   value: clinicInfo.contact.email, href: `mailto:${clinicInfo.contact.email}` },
+                  { icon: MapPin, label: 'Address', value: `${clinicInfo.contact.address.street}, ${clinicInfo.contact.address.city}, TX ${clinicInfo.contact.address.zip}` },
+                  { icon: Clock,  label: 'Hours',   value: 'Mon – Fri: 8:00 AM – 5:00 PM' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 p-4 bg-brand-light rounded-xl border border-slate-100">
                     <div className="w-9 h-9 bg-brand-accent rounded-lg flex items-center justify-center text-brand-secondary shrink-0">
@@ -64,7 +48,7 @@ export function Contact() {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{item.label}</p>
-                      {item.href ? (
+                      {'href' in item && item.href ? (
                         <a href={item.href} className="text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors mt-0.5 block">{item.value}</a>
                       ) : (
                         <p className="text-sm font-medium text-brand-primary mt-0.5">{item.value}</p>
@@ -89,20 +73,17 @@ export function Contact() {
                   width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
-            </motion.div>
+            </div>
 
-            {/* Form */}
-            <motion.div 
-               {...slideRight}
-               className="bg-brand-light rounded-2xl border border-slate-100 p-7 space-y-6"
-            >
+            {/* Form — self-start so it doesn't stretch to match left column height */}
+            <div className="bg-brand-light rounded-2xl border border-slate-100 p-7 space-y-5 self-start">
               <div className="space-y-1">
                 <h3 className="text-lg font-bold text-brand-primary">Send a Message</h3>
                 <p className="text-xs text-slate-400">We'll respond within 24–48 business hours.</p>
               </div>
 
               {submitted ? (
-                <div className="flex flex-col items-center justify-center py-12 space-y-3 text-center">
+                <div className="flex flex-col items-center justify-center py-8 space-y-3 text-center">
                   <div className="w-12 h-12 bg-brand-secondary/10 rounded-full flex items-center justify-center">
                     <CheckCircle size={24} className="text-brand-secondary" />
                   </div>
@@ -114,24 +95,21 @@ export function Contact() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <label className="text-xs font-semibold text-slate-500">Full Name</label>
-                      <input required type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm text-brand-primary focus:outline-none focus:border-brand-secondary transition-colors" />
+                      <input required type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className={inputCls} />
                     </div>
                     <div className="space-y-1">
                       <label className="text-xs font-semibold text-slate-500">Email Address</label>
-                      <input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm text-brand-primary focus:outline-none focus:border-brand-secondary transition-colors" />
+                      <input required type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className={inputCls} />
                     </div>
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-500">Phone Number</label>
-                    <input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })}
-                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm text-brand-primary focus:outline-none focus:border-brand-secondary transition-colors" />
+                    <input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className={inputCls} />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-500">Message</label>
-                    <textarea required rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
-                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-sm text-brand-primary focus:outline-none focus:border-brand-secondary transition-colors resize-none" />
+                    <textarea required rows={4} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
+                      className={`${inputCls} resize-none`} />
                   </div>
                   <button type="submit"
                     className="w-full flex items-center justify-center gap-2 bg-brand-secondary hover:bg-[#007aab] text-white text-sm font-semibold py-3 rounded-full transition-colors">
@@ -139,7 +117,8 @@ export function Contact() {
                   </button>
                 </form>
               )}
-            </motion.div>
+            </div>
+
           </div>
         </div>
       </section>
