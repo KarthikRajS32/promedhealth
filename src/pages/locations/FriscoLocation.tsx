@@ -55,16 +55,16 @@ export function FriscoLocation() {
                           <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
                              <Clock size={16} className="text-brand-secondary" />
                           </div>
-                          <h4 className="text-sm font-black tracking-widest uppercase text-white/60">Office Hours</h4>
+                          <h4 className="text-sm font-black tracking-widest uppercase text-white/90">Office Hours</h4>
                        </div>
                        <ul className="space-y-3">
                           {clinicInfo.contact.hours.map((hour, idx) => (
                              <li key={idx} className="flex items-center justify-between py-3 border-b border-white/10 last:border-0">
-                                <span className="text-sm font-medium text-white/60">{hour.days}</span>
+                                <span className="text-sm font-medium text-white/90">{hour.days}</span>
                                 <span className={`text-sm font-bold px-3 py-1 rounded-full ${
                                    hour.time === 'Closed'
-                                      ? 'bg-white/10 text-white/40'
-                                      : 'bg-brand-secondary/20 text-brand-secondary'
+                                      ? 'bg-white/10 text-red-400'
+                                      : 'bg-brand-secondary/20 text-white/80'
                                 }`}>{hour.time}</span>
                              </li>
                           ))}
@@ -77,7 +77,7 @@ export function FriscoLocation() {
                           <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
                              <Phone size={16} className="text-brand-secondary" />
                           </div>
-                          <h4 className="text-sm font-black tracking-widest uppercase text-white/60">Contact Direct</h4>
+                          <h4 className="text-sm font-black tracking-widest uppercase text-white/80">Contact Direct</h4>
                        </div>
                        <a href={`tel:${clinicInfo.contact.phone}`}
                           className="flex items-center gap-3 p-4 bg-white/5 hover:bg-white/10 rounded-2xl transition-colors group">
@@ -139,7 +139,7 @@ export function FriscoLocation() {
                     </div>
 
                     <div className="space-y-4 pt-6 border-t border-brand-accent/50">
-                       <h4 className="text-sm font-black text-slate-400 uppercase tracking-widest leading-none">Booking</h4>
+                       <h4 className="text-sm font-black text-slate-600 uppercase tracking-widest leading-none">Booking</h4>
                        <Link to="/appointments">
                           <Button variant="outline" className="w-full h-16 rounded-2xl gap-2 font-black border-brand-primary/20 text-brand-primary hover:bg-brand-primary hover:text-white">
                              Schedule at this Location <ArrowRight size={20} />

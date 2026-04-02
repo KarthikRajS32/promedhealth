@@ -35,7 +35,7 @@ export function ServiceDetail() {
                 <h2 className="text-4xl lg:text-5xl font-black text-brand-primary leading-tight">
                   Overview & Diagnosis
                 </h2>
-                <p className="text-xl font-medium text-slate-600 leading-relaxed">
+                <p className="text-lg font-medium text-slate-600 leading-relaxed">
                   {service.content.overview}
                 </p>
               </div>
@@ -82,10 +82,10 @@ export function ServiceDetail() {
 
               <div className="pt-8 space-y-12">
                  <div className="h-1.5 w-20 bg-brand-secondary rounded-full" />
-                 <h2 className="text-4xl lg:text-7xl font-black text-brand-primary leading-tight">
+                 <h2 className="text-4xl lg:text-5xl font-black text-brand-primary leading-tight">
                     Care & Treatment
                  </h2>
-                 <p className="text-xl font-medium text-slate-600 leading-relaxed">
+                 <p className="text-lg font-medium text-slate-600 leading-relaxed">
                     Personalized treatment plans are developed with Dr. Ilayaraja to ensure 
                     long-term health stability and optimal recovery.
                  </p>
@@ -102,13 +102,13 @@ export function ServiceDetail() {
                  </div>
               </div>
 
-              <div className="pt-16 bg-brand-primary rounded-[40px] p-12 lg:p-20 text-brand-white shadow-2xl relative overflow-hidden group">
+              <div className="pt-16 bg-brand-primary rounded-[40px] p-12 lg:p-12 text-brand-white shadow-2xl relative overflow-hidden group">
                  <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none group-hover:scale-110 transition-transform duration-1000 rotate-12">
-                    <ShieldCheck size={320} />
+                    <ShieldCheck size={300} />
                  </div>
                  
                  <div className="relative z-10 space-y-10">
-                    <h3 className="text-3xl lg:text-5xl font-black tracking-tight leading-tight">Benefits of Care</h3>
+                    <h3 className="text-3xl lg:text-5xl text-white/80 tracking-tight leading-tight">Benefits of Care</h3>
                     <div className="grid md:grid-cols-2 gap-8">
                        {service.content.benefits?.map((item, idx) => (
                           <div key={idx} className="flex gap-4 items-start">
@@ -130,8 +130,8 @@ export function ServiceDetail() {
 
                <div className="p-10 bg-brand-primary rounded-[40px] text-brand-white shadow-xl shadow-brand-primary/10 space-y-10">
                   <div className="space-y-4">
-                     <h3 className="text-2xl font-black uppercase tracking-widest leading-tight">Need Immediate Care?</h3>
-                     <p className="text-sm font-bold text-brand-accent/60 leading-relaxed">
+                     <h3 className="text-2xl text-white/90 uppercase tracking-widest leading-tight">Need Immediate Care?</h3>
+                     <p className="text-sm font-bold text-brand-accent/80 leading-relaxed">
                         Consult with Dr. Kavitha Ilayaraja, MD, about these health concerns today.
                      </p>
                   </div>
@@ -154,7 +154,7 @@ export function ServiceDetail() {
                         <div className="w-10 h-10 bg-brand-secondary rounded-xl flex items-center justify-center">
                            <UserCheck size={20} />
                         </div>
-                        <p className="text-xs font-black uppercase tracking-widest">Lead MD: Dr. Ilayaraja</p>
+                        <p className="text-xs font-black uppercase tracking-widest">Lead MD: Dr. Kavitha Ilayaraja</p>
                      </div>
                   </div>
                </div>

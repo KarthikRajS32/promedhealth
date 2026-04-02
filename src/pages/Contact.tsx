@@ -36,8 +36,8 @@ export function Contact() {
               <div className="space-y-12">
                  <div className="space-y-6">
                     <div className="h-1.5 w-20 bg-brand-secondary rounded-full" />
-                    <h2 className="text-4xl lg:text-7xl font-black text-brand-primary tracking-tight">Send a Message</h2>
-                    <p className="text-xl font-medium text-slate-600 leading-relaxed max-w-xl">
+                    <h2 className="text-4xl lg:text-5xl font-black text-brand-primary tracking-tight">Send a Message</h2>
+                    <p className="text-lg font-medium text-slate-600 leading-relaxed max-w-xl">
                        Have a question about our services or need general information? 
                        Use the form below to reach our clinical administrative team.
                     </p>
@@ -68,7 +68,7 @@ export function Contact() {
                                 required
                                 type="text" 
                                 className="w-full h-16 bg-brand-white rounded-2xl px-6 border-2 border-brand-accent/50 focus:border-brand-primary focus:outline-none transition-all font-bold text-brand-primary"
-                                placeholder="Dr. Kavitha Ilayaraja"
+                                placeholder="Name"
                                 value={formData.name}
                                 onChange={e => setFormData({...formData, name: e.target.value})}
                              />
@@ -90,7 +90,7 @@ export function Contact() {
                                 required
                                 type="tel" 
                                 className="w-full h-16 bg-brand-white rounded-2xl px-6 border-2 border-brand-accent/50 focus:border-brand-primary focus:outline-none transition-all font-bold text-brand-primary"
-                                placeholder="(945) 221-6442"
+                                placeholder="(123) 456-7890"
                                 value={formData.phone}
                                 onChange={e => setFormData({...formData, phone: e.target.value})}
                              />
@@ -119,8 +119,8 @@ export function Contact() {
               <div className="space-y-12 lg:sticky lg:top-32">
                  <div className="p-10 bg-brand-primary rounded-[48px] text-brand-white shadow-xl shadow-brand-primary/10 space-y-12">
                     <div className="space-y-6">
-                       <h3 className="text-2xl font-black uppercase tracking-[0.2em] leading-tight">Emergency Information</h3>
-                       <p className="text-lg font-medium text-brand-accent/60 leading-relaxed border-l-4 border-brand-secondary pl-6">
+                       <h3 className="text-2xl font-black text-white/90 uppercase tracking-[0.2em] leading-tight">Emergency Information</h3>
+                       <p className="text-lg font-medium text-brand-accent/90 leading-relaxed border-l-4 border-brand-secondary pl-6">
                           If you are experiencing a life-threatening medical emergency, please call **911** immediately.
                        </p>
                     </div>
