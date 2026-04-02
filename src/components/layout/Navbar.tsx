@@ -58,7 +58,7 @@ export function Navbar() {
           {/* Logo */}
           <Link to="/" className="shrink-0">
             <img src={promedLogo} alt="ProMed Health"
-              className={cn("h-12 w-auto object-contain transition-all", !scrolled && isHome ? "brightness-0 invert" : "")} />
+              className={cn("h-14 w-auto object-contain transition-all", !scrolled && isHome ? "brightness-0 invert" : "")} />
           </Link>
 
           {/* Desktop nav */}

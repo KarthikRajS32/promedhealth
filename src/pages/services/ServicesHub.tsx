@@ -49,12 +49,13 @@ export function ServicesHub() {
       {/* Services grid */}
       <section className="py-14 lg:py-20 bg-warm">
         <div className="wrap">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div key={active} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((service, i) => {
               const Icon = service.icon;
               return (
                 <Link key={service.id} to={`/services/${service.id}`}
-                  className={`group relative flex flex-col bg-card border border-border rounded-3xl overflow-hidden hover:border-s/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rv-up d${(i % 3) + 1}`}>
+                  className="group relative flex flex-col bg-card border border-border rounded-3xl overflow-hidden hover:border-s/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  style={{ animationDelay: `${i * 60}ms`, animation: 'fadeUp 0.4s ease both' }}>
 
                   {/* Top color strip */}
                   <div className="h-1 bg-gradient-to-r from-p to-s" />
