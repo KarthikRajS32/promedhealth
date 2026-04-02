@@ -1,98 +1,51 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
+import { aetna, texasHealth, bcbs, uhc, cigna, medicare, humana, firstHealth, selfPay } from '../../assets';
+
+const plans = [
+  { name: 'Aetna',                logo: aetna},
+  { name: 'Texas Health',         logo: texasHealth},
+  { name: 'BlueCross BlueShield', logo: bcbs },
+  { name: 'UnitedHealthcare',     logo: uhc},
+  { name: 'Cigna',                logo: cigna },
+  { name: 'Medicare',             logo: medicare },
+  { name: 'Humana',               logo: humana},
+  { name: 'First Health',         logo: firstHealth},
+  { name: 'Self-Pay',             logo: selfPay},
+];
 
 export function Insurance() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-warm">
       <SectionBanner
-        title="Insurance"
+        title="Accepted Insurance"
         subtitle=""
-        breadcrumbs={[
-          { name: 'Patient Access', path: '/patient-access' },
-          { name: 'Insurance', path: '/patient-access/insurance' }
-        ]}
+        breadcrumbs={[{ name: 'Patient Access', path: '/patient-access' }, { name: 'Insurance', path: '/patient-access/insurance' }]}
       />
 
-      <section className="section-padding bg-brand-white">
-        <div className="container-custom">
-           <div className="max-w-4xl mx-auto space-y-16">
-              <div className="space-y-6 text-center">
-                 <div className="h-1.5 w-20 bg-brand-secondary rounded-full mx-auto" />
-                 <h2 className="text-4xl lg:text-5xl font-black text-brand-primary">Accepted Insurance</h2>
-              </div>
+      <section className="sp bg-warm">
+        <div className="wrap mt-[-70px]">
+          <div className="text-center mb-12 rv-up">
+            <div className="inline-flex items-center gap-2 bg-a text-s text-xs font-semibold px-3 py-1.5 rounded-full mb-3">Coverage</div>
+            <h2 className="text-3xl">Accepted Insurance Plans</h2>
+            <p className="text-sm text-muted mt-2 max-w-lg mx-auto">Please contact us for any insurance questions</p>
+          </div>
 
-              {/* Insurance Grid */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  { name: 'Aetna', logo: '/images/atena-1.png' },
-                  { name: 'Texas Health', logo: '/images/texax-helath.png' },
-                  { name: 'BlueCross BlueShield', logo: '/images/bcbs.png' },
-                  { name: 'UnitedHealthcare', logo: '/images/UHC2.png' },
-                  { name: 'Cigna', logo: '/images/Cigna.png' },
-                  { name: 'Medicare', logo: '/images/Medicare.png' },
-                  { name: 'Humana', logo: '/images/Humana.png' },
-                  { name: 'First Health', logo: '/images/first-health.png' },
-                  { name: 'Self-Pay', logo: '/images/self-pay.png' },
-                ].map((plan, idx) => (
-                  <div key={idx} className="relative bg-brand-white rounded-[28px] border border-brand-accent shadow-md hover:shadow-xl hover:-translate-y-2 hover:border-brand-secondary/50 transition-all duration-300 group overflow-hidden">
-                    <div className="h-1.5 bg-gradient-to-r from-brand-primary to-brand-secondary" />
-                    <div className="flex flex-col items-center gap-4 p-8">
-                      <div className="w-46 h-24 bg-brand-light rounded-2xl flex items-center justify-center border border-brand-accent group-hover:scale-110 transition-transform duration-300 shadow-sm">
-                        <img src={plan.logo} alt={plan.name} className="h-14 w-auto object-contain" />
-                      </div>
-                      <span className="font-black text-brand-primary text-sm tracking-wide text-center">{plan.name}</span>
-                    </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
+            {plans.map((plan, i) => (
+              <div key={i}
+                className={`group relative bg-card rounded-3xl border border-border overflow-hidden hover:border-s/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 rv-up d${(i % 3) + 1}`}>
+                <div className="h-1 bg-gradient-to-r from-p via-s to-p bg-[length:200%] group-hover:bg-right transition-all duration-700" />
+                <div className="flex items-center justify-center px-8 pt-8 pb-5">
+                  <div className="w-full h-24 flex items-center justify-center bg-warm rounded-2xl border border-border group-hover:border-s/20 group-hover:bg-a/40 transition-all duration-300 p-4">
+                    <img src={plan.logo} alt={plan.name}
+                      className="max-h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300" />
                   </div>
-                ))}
+                </div>
+                
+                <div className="absolute inset-0 rounded-3xl ring-1 ring-s/0 group-hover:ring-s/20 transition-all duration-300 pointer-events-none" />
               </div>
-
-              {/* <div className="grid md:grid-cols-2 gap-12 pt-16 border-t border-brand-accent/50">
-                 <div className="space-y-6 bg-brand-primary rounded-[40px] p-12 text-brand-white shadow-xl shadow-brand-primary/10">
-                    <h3 className="text-3xl font-black">Medicare & Seniors</h3>
-                    <p className="text-lg font-medium text-brand-accent/80 leading-relaxed">
-                       We specialize in internal medicine for seniors and fully coordinate 
-                       with Medicare and Medicare Advantage (Part C) plans.
-                    </p>
-                    <ul className="space-y-4 pt-4">
-                       <li className="flex gap-3 text-sm font-bold items-center">
-                          <CheckCircle size={18} className="text-brand-secondary" />
-                          Annual Wellness Visits Supported
-                       </li>
-                       <li className="flex gap-3 text-sm font-bold items-center">
-                          <CheckCircle size={18} className="text-brand-secondary" />
-                          Part C Coverage Coordination
-                       </li>
-                    </ul>
-                 </div>
-
-                 <div className="space-y-6 bg-brand-light rounded-[40px] p-12 border border-brand-accent shadow-sm">
-                    <h3 className="text-3xl font-black text-brand-primary uppercase tracking-tight">Self-Pay Options</h3>
-                    <p className="text-lg font-medium text-slate-500 leading-relaxed">
-                       For patients without insurance coverage, we offer competitive 
-                       self-pay rates to ensure you don't compromise on your health.
-                    </p>
-                    <div className="pt-6 border-t border-brand-accent/50 group/item">
-                       <p className="text-sm font-black text-brand-primary uppercase tracking-widest mb-4">Request a Quote</p>
-                       <a href={`tel:${clinicInfo.contact.phone}`} className="text-3xl font-black text-brand-primary group-hover/item:text-brand-secondary transition-colors italic">
-                          {clinicInfo.contact.phone}
-                       </a>
-                    </div>
-                 </div>
-              </div> */}
-
-              {/* Warning/Alert */}
-              {/* <div className="bg-brand-accent/50 p-10 rounded-[40px] border border-brand-accent flex flex-col md:flex-row gap-6 md:items-center">
-                 <div className="w-16 h-16 bg-brand-white rounded-2xl flex items-center justify-center text-brand-secondary shadow-sm">
-                    <AlertCircle size={32} />
-                 </div>
-                 <div className="space-y-2">
-                    <h4 className="text-xl font-black text-brand-primary">Verify Your Coverage</h4>
-                    <p className="text-sm font-bold text-slate-500 leading-relaxed max-w-2xl">
-                       Insurance plans and provider networks can change frequently. 
-                       We strongly recommend verifying our current participation with your specific plan before your visit.
-                    </p>
-                 </div>
-              </div> */}
-           </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

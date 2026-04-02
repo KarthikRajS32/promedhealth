@@ -1,218 +1,178 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Phone, Mail, Clock, Menu, X, ChevronDown, Calendar, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, Calendar, Phone } from 'lucide-react';
 import { clinicInfo } from '../../data/content';
 import { services } from '../../data/services';
 import { cn } from '../../lib/utils';
-import { Button } from '../ui/Button';
+import { promedLogo } from '../../assets';
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const location = useLocation();
+  const [open, setOpen]     = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [dd, setDd]         = useState<string | null>(null);
+  const loc = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', fn);
+    return () => window.removeEventListener('scroll', fn);
   }, []);
+  useEffect(() => { setOpen(false); setDd(null); }, [loc]);
 
-  useEffect(() => {
-    setIsOpen(false);
-    setActiveDropdown(null);
-  }, [location]);
+  const isHome = loc.pathname === '/';
 
-  const navLinks = [
+  const links = [
     { name: 'Home', path: '/' },
-    {
-      name: 'About',
-      path: '/about',
-      subLinks: [
-        { name: 'Our Physicians', path: '/about/physicians' },
-        { name: 'Testimonials', path: '/about/testimonials' },
-      ],
-    },
-    {
-      name: 'Patient Access',
-      path: '/patient-access',
-      subLinks: [
-        { name: 'Televisit', path: '/patient-access/televisit' },
-        { name: 'Patient Portal', path: 'https://mycw238.ecwcloud.com/portal27958/jsp/100mp/login_otp.jsp', external: true },
-        { name: 'Pay Your Bill', path: 'https://www.healowpay.com/HealowPay/jsp/healow/login.jsp', external: true },
-        { name: 'Insurance', path: '/patient-access/insurance' },
-      ],
-    },
-    {
-      name: 'Services',
-      path: '/services',
-      subLinks: services.map(s => ({ name: s.title, path: `/services/${s.id}` })),
-    },
+    { name: 'About', path: '/about', sub: [
+      { name: 'Our Physicians', path: '/about/physicians' },
+      { name: 'Testimonials',   path: '/about/testimonials' },
+    ]},
+    { name: 'Patient Access', path: '/patient-access', sub: [
+      { name: 'Televisit',     path: '/patient-access/televisit' },
+      { name: 'Patient Portal',path: 'https://mycw238.ecwcloud.com/portal27958/jsp/100mp/login_otp.jsp', ext: true },
+      { name: 'Pay Your Bill', path: 'https://www.healowpay.com/HealowPay/jsp/healow/login.jsp', ext: true },
+      { name: 'Insurance',     path: '/patient-access/insurance' },
+    ]},
+    { name: 'Services', path: '/services',
+      sub: services.map(s => ({ name: s.title, path: `/services/${s.id}` })) },
     { name: 'Locations', path: '/locations/frisco' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Contact',   path: '/contact' },
   ];
 
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top Utility Bar */}
-      <div className="hidden lg:block bg-brand-primary text-brand-white py-2">
-        <div className="container-custom flex justify-between items-center text-sm font-medium">
-          <div className="flex gap-6">
-            <a href={`tel:${clinicInfo.contact.phone}`} className="flex items-center gap-2 hover:text-brand-accent transition-colors">
-              <Phone size={14} /> {clinicInfo.contact.phone}
-            </a>
-            <a href={`mailto:${clinicInfo.contact.email}`} className="flex items-center gap-2 hover:text-brand-accent transition-colors">
-              <Mail size={14} /> {clinicInfo.contact.email}
-            </a>
-          </div>
-          <div className="flex items-center gap-2">
-            <Clock size={14} />
-            <span>Mon - Fri: 8:00 AM – 5:00 PM</span>
-          </div>
-        </div>
-      </div>
+  const navBg = scrolled
+    ? 'bg-white/95 backdrop-blur-md shadow-sm shadow-slate-200/50 border-b border-border'
+    : isHome
+      ? 'bg-transparent'
+      : 'bg-white border-b border-border';
 
-      {/* Main Navigation */}
-      <nav className={cn(
-        "transition-all duration-300",
-        isScrolled ? "bg-brand-white shadow-md py-3" : "bg-brand-white py-5"
-      )}>
-        <div className="container-custom flex justify-between items-center">
+  const textColor = (active: boolean) =>
+    scrolled || !isHome
+      ? active ? 'text-s' : 'text-muted hover:text-ink'
+      : active ? 'text-s' : 'text-white/80 hover:text-white';
+
+  return (
+    <header className="fixed top-0 inset-x-0 z-50">
+      <nav className={cn("transition-all duration-400", navBg)}>
+        <div className="wrap flex items-center justify-between h-[68px]">
+
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <img
-              src="/images/promed-logo.png"
-              alt="ProMed Health"
-              className="h-14 lg:h-16 w-auto object-contain"
-            />
+          <Link to="/" className="shrink-0">
+            <img src={promedLogo} alt="ProMed Health"
+              className={cn("h-12 w-auto object-contain transition-all", !scrolled && isHome ? "brightness-0 invert" : "")} />
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <div key={link.name} className="relative group">
-                {link.subLinks ? (
-                  <button
-                    className={cn(
-                      "px-4 py-2 text-[15px] font-bold text-slate-600 hover:text-brand-primary flex items-center gap-1 transition-colors",
-                      activeDropdown === link.name && "text-brand-primary"
-                    )}
-                    onMouseEnter={() => setActiveDropdown(link.name)}
-                    onMouseLeave={() => setActiveDropdown(null)}
-                  >
-                    {link.name} <ChevronDown size={14} className={cn("transition-transform", activeDropdown === link.name && "rotate-180")} />
+            {links.map(link => (
+              <div key={link.name} className="relative"
+                onMouseEnter={() => link.sub && setDd(link.name)}
+                onMouseLeave={() => setDd(null)}>
+                {link.sub ? (
+                  <button className={cn("flex items-center gap-1 px-3.5 py-2 text-sm font-medium rounded-lg transition-colors", textColor(dd === link.name))}>
+                    {link.name}
+                    <ChevronDown size={13} className={cn("transition-transform", dd === link.name && "rotate-180")} />
                   </button>
                 ) : (
-                  <NavLink
-                    to={link.path}
-                    className={({ isActive }) => cn(
-                      "px-4 py-2 text-[15px] font-bold transition-colors",
-                      isActive ? "text-brand-primary" : "text-slate-600 hover:text-brand-primary"
-                    )}
-                  >
+                  <NavLink to={link.path} className={({ isActive }) =>
+                    cn("block px-3.5 py-2 text-sm font-medium rounded-lg transition-colors", textColor(isActive))}>
                     {link.name}
                   </NavLink>
                 )}
 
-                {/* Desktop Dropdown */}
-                {link.subLinks && (
-                  <div
-                    className={cn(
-                      "absolute top-full left-0 w-64 bg-brand-white shadow-2xl rounded-2xl border border-brand-accent transform transition-all duration-200 p-2",
-                      activeDropdown === link.name ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2 pointer-events-none",
-                      link.name === 'Services' && "w-[480px] grid grid-cols-2 p-4"
-                    )}
-                    onMouseEnter={() => setActiveDropdown(link.name)}
-                    onMouseLeave={() => setActiveDropdown(null)}
-                  >
-                    {link.subLinks.map((sub) => (
-                      sub.external ? (
-                        <a
-                          key={sub.name}
-                          href={sub.path}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-3 text-[14px] font-bold text-slate-700 hover:bg-brand-accent hover:text-brand-primary rounded-xl transition-all flex items-center justify-between group/sub"
-                          onClick={() => setActiveDropdown(null)}
-                        >
+                {link.sub && (
+                  <div className={cn(
+                    "absolute top-full left-0 pt-3 z-50",
+                    link.name === 'Services' ? "w-[460px]" : "w-52",
+                    dd === link.name ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+                  )}>
+                    <div className={cn(
+                      "bg-white rounded-2xl shadow-xl border border-border py-1.5 transition-all duration-200",
+                      link.name === 'Services' ? "grid grid-cols-2 gap-0 p-2" : "",
+                      dd === link.name ? "translate-y-0" : "-translate-y-2"
+                    )}>
+                    {link.sub.map(sub =>
+                      (sub as any).ext ? (
+                        <a key={sub.name} href={sub.path} target="_blank" rel="noopener noreferrer"
+                          className="block px-3.5 py-2.5 text-sm text-muted hover:text-s hover:bg-a rounded-xl transition-colors">
                           {sub.name}
-                          <ArrowRight size={14} className="opacity-0 group-hover/sub:opacity-100 -translate-x-2 group-hover/sub:translate-x-0 transition-all" />
                         </a>
                       ) : (
-                        <Link
-                          key={sub.name}
-                          to={sub.path}
-                          className="p-3 text-[14px] font-bold text-slate-700 hover:bg-brand-accent hover:text-brand-primary rounded-xl transition-all flex items-center justify-between group/sub"
-                          onClick={() => setActiveDropdown(null)}
-                        >
+                        <Link key={sub.name} to={sub.path}
+                          className="block px-3.5 py-2.5 text-sm text-muted hover:text-s hover:bg-a rounded-xl transition-colors">
                           {sub.name}
-                          <ArrowRight size={14} className="opacity-0 group-hover/sub:opacity-100 -translate-x-2 group-hover/sub:translate-x-0 transition-all" />
                         </Link>
                       )
-                    ))}
+                    )}
+                    </div>
                   </div>
                 )}
               </div>
             ))}
+          </div>
 
-            <div className="ml-4 h-6 w-px bg-slate-200" />
-
-            <Link to="/appointments" className="ml-6">
-              <Button size="md" className="gap-2">
-                <Calendar size={18} /> Book Online
-              </Button>
+          {/* Right CTA */}
+          <div className="hidden lg:flex items-center gap-3">
+            <a href={`tel:${clinicInfo.contact.phone}`}
+              className={cn("text-sm font-medium transition-colors flex items-center gap-1.5", !scrolled && isHome ? "text-white/70 hover:text-white" : "text-muted hover:text-ink")}>
+              <Phone size={13} /> {clinicInfo.contact.phone}
+            </a>
+            <Link to="/appointments"
+              className="inline-flex items-center gap-1.5 bg-s hover:bg-[#157a6a] text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all hover:-translate-y-px shadow-sm">
+              <Calendar size={13} /> Book Now
             </Link>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button className="lg:hidden p-2 text-slate-600 focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          <button className="lg:hidden p-2" onClick={() => setOpen(!open)}>
+            {open
+              ? <X size={22} className={!scrolled && isHome ? "text-white" : "text-ink"} />
+              : <Menu size={22} className={!scrolled && isHome ? "text-white" : "text-ink"} />}
           </button>
         </div>
 
-        {/* Mobile Nav */}
+        {/* Mobile */}
         <div className={cn(
-          "lg:hidden fixed inset-x-0 bottom-0 top-[72px] bg-brand-white transform transition-transform duration-300 z-50 overflow-y-auto",
-          isOpen ? "translate-x-0" : "translate-x-full"
+          "lg:hidden fixed inset-x-0 top-[68px] bottom-0 bg-white z-50 overflow-y-auto transition-transform duration-300",
+          open ? "translate-x-0" : "translate-x-full"
         )}>
-          <div className="p-6 flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <div key={link.name} className="border-b border-slate-50 last:border-none">
-                {link.subLinks ? (
-                  <div className="py-4">
-                    <button
-                      className="flex items-center justify-between w-full text-lg font-black text-brand-primary"
-                      onClick={() => setActiveDropdown(activeDropdown === link.name ? null : link.name)}
-                    >
-                      {link.name} <ChevronDown size={20} className={cn("transition-transform", activeDropdown === link.name && "rotate-180")} />
+          <div className="p-5 space-y-1">
+            {links.map(link => (
+              <div key={link.name}>
+                {link.sub ? (
+                  <>
+                    <button onClick={() => setDd(dd === link.name ? null : link.name)}
+                      className="flex items-center justify-between w-full px-4 py-3 text-sm font-semibold text-p rounded-xl hover:bg-a transition-colors">
+                      {link.name}
+                      <ChevronDown size={14} className={cn("transition-transform", dd === link.name && "rotate-180")} />
                     </button>
-                    <div className={cn(
-                      "mt-4 flex flex-col gap-3 pl-4 border-l-2 border-brand-accent overflow-hidden transition-all duration-300",
-                      activeDropdown === link.name ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
-                    )}>
-                      {link.subLinks.map(sub => (
-                        sub.external ? (
-                          <a key={sub.name} href={sub.path} target="_blank" rel="noopener noreferrer" className="text-base font-bold text-slate-600 py-1">
+                    <div className={cn("ml-3 overflow-hidden transition-all duration-300",
+                      dd === link.name ? "max-h-[500px] opacity-100 mt-1" : "max-h-0 opacity-0")}>
+                      {link.sub.map(sub =>
+                        (sub as any).ext ? (
+                          <a key={sub.name} href={sub.path} target="_blank" rel="noopener noreferrer"
+                            className="block px-4 py-2.5 text-sm text-muted hover:text-s border-l-2 border-border hover:bg-a rounded-r-xl transition-colors">
                             {sub.name}
                           </a>
                         ) : (
-                          <Link key={sub.name} to={sub.path} className="text-base font-bold text-slate-600 py-1">
+                          <Link key={sub.name} to={sub.path}
+                            className="block px-4 py-2.5 text-sm text-muted hover:text-s border-l-2 border-border hover:bg-a rounded-r-xl transition-colors">
                             {sub.name}
                           </Link>
                         )
-                      ))}
+                      )}
                     </div>
-                  </div>
+                  </>
                 ) : (
-                  <Link to={link.path} className="block py-4 text-lg font-black text-brand-primary">
+                  <Link to={link.path} className="block px-4 py-3 text-sm font-semibold text-p rounded-xl hover:bg-a transition-colors">
                     {link.name}
                   </Link>
                 )}
               </div>
             ))}
-            <Link to="/appointments" className="mt-8">
-              <Button size="lg" className="w-full h-16 rounded-2xl">Book Appointment</Button>
-            </Link>
+            <div className="pt-4">
+              <Link to="/appointments" className="flex items-center justify-center gap-2 w-full bg-s text-white text-sm font-semibold py-3 rounded-full">
+                <Calendar size={14} /> Book Appointment
+              </Link>
+            </div>
           </div>
         </div>
       </nav>

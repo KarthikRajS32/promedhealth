@@ -1,143 +1,101 @@
 import { SectionBanner } from '../components/ui/SectionBanner';
 import { clinicInfo } from '../data/content';
-import { Calendar, Apple, Smartphone, ShieldCheck, CheckCircle, Clock, Phone, ArrowUpRight } from 'lucide-react';
-import { Button } from '../components/ui/Button';
+import { Calendar, Smartphone, ShieldCheck, Clock, Phone, CheckCircle, ArrowUpRight } from 'lucide-react';
 
 export function Appointments() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-warm">
       <SectionBanner
         title="Book Appointment"
         subtitle="Schedule your clinical visit online or via telephone for seamless healthcare access."
-        breadcrumbs={[
-          { name: 'Appointments', path: '/appointments' }
-        ]}
+        breadcrumbs={[{ name: 'Appointments', path: '/appointments' }]}
       />
 
-      <section className="section-padding bg-brand-white">
-        <div className="container-custom">
-           <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
-              {/* Booking Options Column */}
-              <div className="space-y-12">
-                 <div className="space-y-6">
-                    <div className="h-1.5 w-20 bg-brand-secondary rounded-full" />
-                    <h2 className="text-4xl lg:text-7xl font-black text-brand-primary tracking-tight">Simple Booking. <br/> Expert Care.</h2>
-                    <p className="text-xl font-medium text-slate-600 leading-relaxed max-w-xl">
-                       We've partnered with **Healow** to provide a direct, real-time 
-                       scheduling experience. Book your physical, televisit, or chronic care 
-                       appointment in just a few clicks.
-                    </p>
-                 </div>
-
-                 <div className="space-y-8">
-                    <div className="p-10 bg-brand-accent rounded-[48px] border border-brand-accent/50 shadow-sm group hover:shadow-2xl transition-all">
-                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-                          <div className="space-y-4">
-                             <div className="w-14 h-14 bg-brand-primary rounded-2xl flex items-center justify-center text-brand-white shadow-xl">
-                                <Calendar size={28} />
-                             </div>
-                             <h3 className="text-2xl font-black text-brand-primary uppercase tracking-tight leading-tight">Online Scheduler</h3>
-                             <p className="text-sm font-bold text-slate-500 leading-relaxed max-w-xs">
-                                Use the Healow portal for 24/7 access to our calendar.
-                             </p>
-                          </div>
-                          <a href={clinicInfo.portalUrls.patientPortal} target="_blank" rel="noopener noreferrer">
-                             <Button size="lg" className="h-16 px-10 rounded-2xl gap-2 shadow-2xl">
-                                Book Now <ArrowUpRight size={20} />
-                             </Button>
-                          </a>
-                       </div>
-                    </div>
-
-                    <div className="p-10 bg-brand-primary rounded-[48px] text-brand-white shadow-xl shadow-brand-primary/10 group hover:shadow-2xl transition-all">
-                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-                          <div className="space-y-4">
-                             <div className="w-14 h-14 bg-brand-white/10 rounded-2xl flex items-center justify-center text-brand-secondary shadow-lg">
-                                <Phone size={28} />
-                             </div>
-                             <h3 className="text-2xl font-black uppercase tracking-tight leading-tight">Scheduling Line</h3>
-                             <p className="text-sm font-bold text-brand-accent/60 leading-relaxed max-w-xs">
-                                Prefer to speak with us? Call our office directly.
-                             </p>
-                          </div>
-                          <a href={`tel:${clinicInfo.contact.phone}`}>
-                             <Button size="lg" className="h-16 px-10 rounded-2xl gap-2 shadow-2xl bg-brand-secondary">
-                                Call to Book <Phone size={20} />
-                             </Button>
-                          </a>
-                       </div>
-                    </div>
-                 </div>
-
-                 <div className="pt-8 grid sm:grid-cols-2 gap-8">
-                    {[
-                      { icon: ShieldCheck, title: "HIPAA Secure", desc: "Your data is protected by the highest medical encryption standards." },
-                      { icon: Clock, title: "Same-Day Visits", desc: "Acute issues often seen on the same business day." }
-                    ].map((item, idx) => (
-                       <div key={idx} className="flex gap-4">
-                          <div className="shrink-0 w-12 h-12 bg-brand-accent rounded-xl flex items-center justify-center text-brand-primary">
-                             <item.icon size={24} />
-                          </div>
-                          <div>
-                             <h4 className="font-black text-brand-primary">{item.title}</h4>
-                             <p className="text-sm font-bold text-slate-500 mt-1">{item.desc}</p>
-                          </div>
-                       </div>
-                    ))}
-                 </div>
+      <section className="sp bg-warm">
+        <div className="wrap">
+          <div className="grid md:grid-cols-2 gap-5 mb-8">
+            {/* Online */}
+            <div className="bg-card border border-border rounded-2xl p-7 space-y-5 rv-left">
+              <div className="flex items-center justify-between">
+                <div className="w-10 h-10 bg-a rounded-xl flex items-center justify-center text-s">
+                  <Calendar size={18} />
+                </div>
+                <span className="text-xs font-semibold text-muted uppercase tracking-widest">Option 01</span>
               </div>
-
-              {/* Mobile Apps Sidebar */}
-              <div className="space-y-12 lg:sticky lg:top-32">
-                 <div className="p-12 lg:p-16 bg-brand-accent rounded-[64px] border border-brand-accent/50 space-y-12 shadow-sm">
-                    <div className="space-y-6">
-                       <div className="w-20 h-20 bg-brand-primary rounded-[32px] flex items-center justify-center text-brand-white shadow-xl">
-                          <Smartphone size={40} />
-                       </div>
-                       <h3 className="text-4xl font-black text-brand-primary tracking-tight leading-tight">Book on <br/> the Go</h3>
-                       <p className="text-lg font-medium text-slate-500 leading-relaxed">
-                          Download the **Healow App** on your smartphone for the 
-                          fastest booking and medical record access.
-                       </p>
-                    </div>
-
-                    <div className="space-y-4">
-                       <div className="flex items-center gap-6 p-6 bg-brand-white rounded-3xl border border-brand-accent shadow-sm group hover:border-brand-primary transition-all">
-                          <Apple size={32} className="text-slate-400 group-hover:text-brand-primary transition-colors" />
-                          <div>
-                             <h4 className="text-sm font-black text-brand-primary uppercase tracking-widest">App Store</h4>
-                             <p className="text-[11px] font-bold text-slate-400">Download for iPhone</p>
-                          </div>
-                       </div>
-                       <div className="flex items-center gap-6 p-6 bg-brand-white rounded-3xl border border-brand-accent shadow-sm group hover:border-brand-primary transition-all">
-                          <Smartphone size={32} className="text-slate-400 group-hover:text-brand-primary transition-colors" />
-                          <div>
-                             <h4 className="text-sm font-black text-brand-primary uppercase tracking-widest">Google Play</h4>
-                             <p className="text-[11px] font-bold text-slate-400">Download for Android</p>
-                          </div>
-                       </div>
-                    </div>
-
-                    <div className="pt-8 border-t border-brand-accent/50 space-y-4">
-                       <h4 className="text-sm font-black uppercase tracking-[0.2em] text-brand-primary leading-none">Our Code: PHPC</h4>
-                       <p className="text-sm font-bold text-slate-400 leading-relaxed">
-                          Use the code **PHPC** when prompted in the Healow app to find our Frisco practice.
-                       </p>
-                    </div>
-                 </div>
-
-                 {/* New Patient Check */}
-                 <div className="p-10 bg-brand-primary rounded-[48px] text-brand-white flex gap-6 items-center">
-                    <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-brand-secondary shrink-0">
-                       <CheckCircle size={32} />
-                    </div>
-                    <div>
-                       <h4 className="text-xl font-black uppercase tracking-tight leading-none">New Patients Welcome</h4>
-                       <p className="text-sm font-bold mt-1 text-brand-accent/60 leading-tight">We are currently accepting new residents of Frisco and surrounding areas.</p>
-                    </div>
-                 </div>
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold text-p">Book Online</h3>
+                <p className="text-sm text-muted leading-relaxed">Access Dr. Ilayaraja's real-time availability. Best for physicals, follow-ups, and non-emergent visits.</p>
               </div>
-           </div>
+              <ul className="space-y-2">
+                {['24/7 Online Access', 'Instant Confirmation', 'Secure & Private'].map(item => (
+                  <li key={item} className="flex items-center gap-2 text-xs text-muted">
+                    <CheckCircle size={12} className="text-s shrink-0" /> {item}
+                  </li>
+                ))}
+              </ul>
+              <a href={clinicInfo.portalUrls.patientPortal} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-s hover:bg-[#157a6a] text-white text-sm font-semibold px-6 py-3 rounded-full transition-all hover:-translate-y-px w-full justify-center shadow-sm">
+                <ArrowUpRight size={14} /> Launch Scheduler
+              </a>
+            </div>
+
+            {/* Phone */}
+            <div className="bg-p rounded-2xl p-7 space-y-5 rv-right">
+              <div className="flex items-center justify-between">
+                <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-s">
+                  <Phone size={18} />
+                </div>
+                <span className="text-xs font-semibold text-white/30 uppercase tracking-widest">Option 02</span>
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold text-white">Call to Book</h3>
+                <p className="text-sm text-white/55 leading-relaxed">Prefer speaking with someone? Our team can help coordinate complex visits or multi-physician record transfers.</p>
+              </div>
+              <ul className="space-y-2">
+                {['Personalized Assistance', 'Complex Visit Coordination', 'Mon–Fri 8AM–5PM'].map(item => (
+                  <li key={item} className="flex items-center gap-2 text-xs text-white/60">
+                    <CheckCircle size={12} className="text-s shrink-0" /> {item}
+                  </li>
+                ))}
+              </ul>
+              <a href={`tel:${clinicInfo.contact.phone}`}
+                className="inline-flex items-center gap-2 bg-s hover:bg-[#157a6a] text-white text-sm font-semibold px-6 py-3 rounded-full transition-all hover:-translate-y-px w-full justify-center shadow-sm">
+                <Phone size={14} /> {clinicInfo.contact.phone}
+              </a>
+            </div>
+          </div>
+
+          {/* Healow app */}
+          <div className="bg-card border border-border rounded-2xl p-7 rv-up">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 bg-a text-s text-xs font-semibold px-3 py-1.5 rounded-full">Mobile App</div>
+                <h3 className="text-xl font-semibold text-p">Book on the Go with Healow</h3>
+                <p className="text-sm text-muted leading-relaxed">Download the Healow app for the fastest coordination of your medical records and appointments from your phone.</p>
+                <div className="flex items-center gap-3 p-4 bg-ink rounded-2xl">
+                  <Smartphone size={18} className="text-s shrink-0" />
+                  <div>
+                    <p className="text-xs text-white/50">Practice Code</p>
+                    <p className="text-lg font-bold text-white tracking-widest">PHPC</p>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { icon: Clock,       title: 'Same-Day Access',  desc: 'Acute issues prioritized for same-day consultation.' },
+                  { icon: ShieldCheck, title: 'HIPAA Certified',  desc: 'Digital intake protected by medical encryption.' },
+                  { icon: Smartphone,  title: 'Universal Sync',   desc: 'Appointments sync instantly across all devices.' },
+                  { icon: Calendar,    title: 'Easy Reschedule',  desc: 'Modify or cancel appointments anytime online.' },
+                ].map((item, i) => (
+                  <div key={i} className={`bg-warm border border-border rounded-xl p-4 space-y-2 rv-up d${i+1}`}>
+                    <item.icon size={15} className="text-s" />
+                    <p className="text-xs font-semibold text-p">{item.title}</p>
+                    <p className="text-xs text-muted leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

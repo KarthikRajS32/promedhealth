@@ -1,92 +1,66 @@
 import { SectionBanner } from '../../components/ui/SectionBanner';
 import { testimonials } from '../../data/content';
-import { Quote, Star, ArrowRight } from 'lucide-react';
+import { Quote, ArrowRight, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Button } from '../../components/ui/Button';
 
 export function Testimonials() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-warm">
       <SectionBanner
         title="Patient Testimonials"
         subtitle="Read the personal experiences of the patients we serve at ProMed Health Primary Care."
-        breadcrumbs={[
-          { name: 'About', path: '/about' },
-          { name: 'Testimonials', path: '/about/testimonials' }
-        ]}
+        breadcrumbs={[{ name: 'About', path: '/about' }, { name: 'Testimonials', path: '/about/testimonials' }]}
       />
 
-      {/* Intro Stats - Simplified */}
-      <section className="py-20 bg-brand-white border-b border-brand-accent">
-        <div className="container-custom">
-          <div className="max-w-2xl">
-            <div className="h-1.5 w-16 bg-brand-secondary rounded-full mb-6" />
-            <h2 className="text-3xl lg:text-4xl font-black text-brand-primary mb-4">Patient Stories</h2>
-            <p className="text-lg font-medium text-slate-500 leading-relaxed">
-              We take great pride in delivering compassionate, patient-centered care. 
+      {/* Intro */}
+      <section className="sp bg-warm border-b border-border">
+        <div className="wrap">
+          <div className="max-w-2xl rv-left mt-[-70px]">
+            <div className="inline-flex items-center gap-2 bg-a text-s text-xs font-semibold px-3 py-1.5 rounded-full mb-4">Patient Stories</div>
+            <h2 className="text-3xl lg:text-4xl mb-4">What Our Community Is Saying</h2>
+            <p className="text-sm text-muted leading-relaxed">
+              We take great pride in delivering compassionate, patient-centered care.
               Here is what our community in Frisco is saying about their experience with ProMed Health.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Testimonials — masonry columns, natural card heights */}
-      <section className="section-padding bg-brand-warm">
-        <div className="container-custom">
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+      {/* Masonry grid */}
+      <section className="sp bg-card">
+        <div className="wrap">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 mt-[-60px]">
             {testimonials.map((item, idx) => {
               const isFeatured = idx === 0 || idx === 3;
-              const isAccent = idx === 2;
+              const isAccent   = idx === 2;
               return (
-                <div
-                  key={idx}
-                  className={`break-inside-avoid mb-5 flex flex-col gap-4 rounded-xl border p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group ${
-                    isFeatured
-                      ? 'bg-brand-primary border-brand-primary'
-                      : isAccent
-                      ? 'bg-brand-secondary border-brand-secondary'
-                      : 'bg-white border-slate-100 hover:border-brand-secondary/30'
-                  }`}
-                >
-                  {/* quote */}
-                  <div className="flex items-center justify-between">
-                  
-                    <Quote
-                      size={20}
-                      className={`transition-all duration-300 ${
-                        isFeatured
-                          ? 'text-white/15 group-hover:text-white/50 group-hover:scale-110'
-                          : isAccent
-                          ? 'text-white/20 group-hover:text-white/60 group-hover:scale-110'
-                          : 'text-slate-100 group-hover:text-brand-secondary group-hover:scale-110'
-                      }`}
-                      fill="currentColor"
-                    />
-                  </div>
-
-                  {/* Full review — no truncation, no min-height */}
-                  <p className={`text-sm leading-relaxed ${
-                    isFeatured || isAccent ? 'text-white/75' : 'text-slate-500'
+                <div key={idx}
+                  className={`break-inside-avoid mb-5 flex flex-col gap-4 rounded-2xl border p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group rv-up d${(idx % 3) + 1} ${
+                    isFeatured ? 'bg-p border-p'
+                    : isAccent  ? 'bg-s border-s'
+                    : 'bg-warm border-border hover:border-s/30'
                   }`}>
+                  <div className="flex items-center justify-between">
+                    <Quote size={18}
+                      className={`transition-all duration-300 ${
+                        isFeatured ? 'text-white/15 group-hover:text-white/50 group-hover:scale-110'
+                        : isAccent  ? 'text-white/20 group-hover:text-white/60 group-hover:scale-110'
+                        : 'text-border group-hover:text-s group-hover:scale-110'
+                      }`}
+                      fill="currentColor" />
+                  </div>
+                  <p className={`text-sm leading-relaxed ${isFeatured || isAccent ? 'text-white/75' : 'text-muted'}`}>
                     "{item.text}"
                   </p>
-
-                  {/* Author */}
-                  <div className={`flex items-center gap-3 pt-3 border-t ${
-                    isFeatured ? 'border-white/10' : isAccent ? 'border-white/20' : 'border-slate-100'
-                  }`}>
-                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center font-semibold text-sm shrink-0 ${
-                      isFeatured ? 'bg-brand-secondary text-white' : isAccent ? 'bg-white text-brand-secondary' : 'bg-brand-primary text-white'
+                  <div className={`flex items-center gap-3 pt-3 border-t ${isFeatured ? 'border-white/10' : isAccent ? 'border-white/20' : 'border-border'}`}>
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-semibold text-sm shrink-0 ${
+                      isFeatured ? 'bg-s text-white' : isAccent ? 'bg-white text-s' : 'bg-p text-white'
                     }`}>
                       {item.author.charAt(0)}
                     </div>
                     <div>
-                      <p className={`text-sm font-semibold ${
-                        isFeatured || isAccent ? 'text-white' : 'text-brand-primary'
-                      }`}>{item.author}</p>
-                      <p className={`text-xs ${
-                        isFeatured || isAccent ? 'text-white/40' : 'text-slate-400'
-                      }`}>Designation</p>
+                      <p className={`text-sm font-semibold ${isFeatured || isAccent ? 'text-white' : 'text-p'}`}>{item.author}</p>
+                      <p className={`text-xs ${isFeatured || isAccent ? 'text-white/40' : 'text-muted'}`}>Designation</p>
                     </div>
                   </div>
                 </div>
@@ -96,32 +70,22 @@ export function Testimonials() {
         </div>
       </section>
 
-      
-
-      {/* Call to Action */}
-      <section className="section-padding bg-brand-white">
-        <div className="container-custom">
-          <div className="bg-brand-primary rounded-[40px] p-10 lg:p-16 shadow-2xl relative overflow-hidden group">
-             <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none group-hover:scale-110 transition-transform duration-1000 rotate-12">
-                <Star size={320} />
-             </div>
-             
-             <div className="max-w-3xl mx-auto text-center space-y-10 relative z-10">
-                <h2 className="text-3xl lg:text-5xl font-black text-brand-white leading-tight tracking-tight">Your Health Deserves <br/> Exceptional Care.</h2>
-                <p className="text-lg font-medium text-brand-accent/80 leading-relaxed">
-                  Join our community of healthy, satisfied patients. We're currently accepting new patients at our Frisco location.
-                </p>
-                <div className="flex flex-col sm:flex-row justify-center gap-6">
-                  <Link to="/appointments">
-                    <Button size="lg" className="h-16 px-12 text-lg">Book Appointment</Button>
-                  </Link>
-                  <Link to="/services">
-                    <Button variant="outline" size="lg" className="border-brand-white/20 text-brand-white hover:bg-brand-white/10 h-16 px-12 text-lg gap-2">
-                       Our Services <ArrowRight size={20} />
-                    </Button>
-                  </Link>
-                </div>
-             </div>
+      {/* CTA */}
+      <section className="bg-s py-14">
+        <div className="wrap flex flex-col lg:flex-row items-center justify-between gap-8 rv-up">
+          <div className="text-center lg:text-left space-y-2">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Your Health Deserves Exceptional Care.</h2>
+            <p className="text-sm text-white/65">Join our community of satisfied patients. Now accepting new patients in Frisco.</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <Link to="/appointments"
+              className="inline-flex items-center justify-center gap-2 bg-white hover:bg-warm text-s text-sm font-semibold px-7 py-3 rounded-full transition-all hover:-translate-y-px shadow-sm">
+              <Calendar size={14} /> Book Appointment
+            </Link>
+            <Link to="/services"
+              className="inline-flex items-center justify-center gap-2 border border-white/25 text-white hover:bg-white/10 text-sm font-medium px-7 py-3 rounded-full transition-all">
+              Our Services <ArrowRight size={14} />
+            </Link>
           </div>
         </div>
       </section>
