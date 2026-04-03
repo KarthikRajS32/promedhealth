@@ -91,7 +91,7 @@ export function ServicesHub() {
       </section>
 
       {/* CTA banner */}
-      <section className="bg-p py-16">
+      <section className="bg-p/90 py-16">
         <div className="wrap">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-5 rv-left">

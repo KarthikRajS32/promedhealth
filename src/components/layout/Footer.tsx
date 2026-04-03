@@ -50,9 +50,9 @@ export function Footer() {
           {/* Brand + contact */}
           <div className="lg:col-span-4 space-y-7">
             <Link to="/">
-              <img src={promedLogo} alt="ProMed Health" className="h-14 w-auto brightness-0 invert opacity-90" />
+              <img src={promedLogo} alt="ProMed Health" className="h-14 w-auto mt-[-11px] brightness-0 invert opacity-90" />
             </Link>
-            <p className="text-sm text-white/45 leading-relaxed">
+            <p className="text-sm text-white/70 leading-relaxed">
               Patient-centered primary care in Frisco, TX — led by Dr. Kavitha Ilayaraja, MD, board certified in Internal Medicine.
             </p>
 
@@ -66,8 +66,8 @@ export function Footer() {
                 <div key={i} className="flex items-start gap-3">
                   <Icon size={14} className="text-s shrink-0 mt-0.5" />
                   {href
-                    ? <a href={href} className="text-sm text-white/50 hover:text-white transition-colors">{text}</a>
-                    : <span className="text-sm text-white/50">{text}</span>
+                    ? <a href={href} className="text-sm text-white/70 hover:text-white transition-colors">{text}</a>
+                    : <span className="text-sm text-white/70">{text}</span>
                   }
                 </div>
               ))}
@@ -76,30 +76,30 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="lg:col-span-2 space-y-5">
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">Quick Links</p>
-            <ul className="space-y-3">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">Quick Links</p>
+            <ul className="space-y-3 ">
               {navLinks.map(l => <li key={l.name}>{lnk(l)}</li>)}
             </ul>
           </div>
 
           {/* Patient Access */}
           <div className="lg:col-span-2 space-y-5">
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">Patient Access</p>
-            <ul className="space-y-3">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">Patient Access</p>
+            <ul className="space-y-3 ">
               {patientLinks.map(l => <li key={l.name}>{lnk(l)}</li>)}
             </ul>
           </div>
 
           {/* Services */}
           <div className="lg:col-span-4 space-y-5">
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/60">Our Services</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">Our Services</p>
             <ul className="grid grid-cols-2 gap-x-6 gap-y-3">
               {services.slice(0, 8).map(s => (
                 <li key={s.id}>{lnk({ name: s.title, path: `/services/${s.id}`, ext: false })}</li>
               ))}
             </ul>
             <Link to="/services"
-              className="inline-flex items-center gap-1.5 text-xs text-s hover:text-white transition-colors mt-1">
+              className="inline-flex items-center gap-1.5 text-sm text-green-400 hover:text-white transition-colors mt-1">
               View all services <ArrowRight size={11} />
             </Link>
           </div>
@@ -121,11 +121,11 @@ export function Footer() {
       {/* ── Bottom bar ── */}
       <div className="border-t border-white/8">
         <div className="wrap py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-          <p className="text-sm text-white/60">© {year} ProMed Health Primary Care. All rights reserved.</p>
-          <div className="flex items-center gap-1 text-white/50 text-sm">
-            <Link to="/privacy" className="hover:text-white/80 transition-colors px-3 py-1">Privacy Policy</Link>
+          <p className="text-sm text-white/70">© {year} ProMed Health Primary Care. All rights reserved.</p>
+          <div className="flex items-center gap-1 text-white/70 text-sm">
+            <Link to="/privacy" className="hover:text-white/90 transition-colors px-3 py-1">Privacy Policy</Link>
             <span>·</span>
-            <Link to="/terms"   className="hover:text-white/80 transition-colors px-3 py-1">Terms & Conditions</Link>
+            <Link to="/terms"   className="hover:text-white/90 transition-colors px-3 py-1">Terms & Conditions</Link>
           </div>
         </div>
       </div>
