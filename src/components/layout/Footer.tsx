@@ -72,7 +72,7 @@ export function Footer() {
           <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-2 gap-12">
             {footerLinks.slice(0, 2).map((section) => (
               <div key={section.title} className="space-y-8">
-                <h5 className="text-xl font-black relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-brand-secondary rounded-full">
+                <h5 className="text-xl font-black text-white/90 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-brand-secondary rounded-full">
                   {section.title}
                 </h5>
                 <ul className="space-y-4">
@@ -94,7 +94,7 @@ export function Footer() {
 
           {/* Contact info in footer */}
           <div className="space-y-8">
-            <h5 className="text-xl font-black relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-brand-secondary rounded-full">
+            <h5 className="text-xl font-black text-white/90 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-10 after:h-1 after:bg-brand-secondary rounded-full">
               Get In Touch
             </h5>
             <div className="space-y-6">

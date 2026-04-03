@@ -21,8 +21,8 @@ export function Appointments() {
               <div className="space-y-12">
                  <div className="space-y-6">
                     <div className="h-1.5 w-20 bg-brand-secondary rounded-full" />
-                    <h2 className="text-4xl lg:text-7xl font-black text-brand-primary tracking-tight">Simple Booking. <br/> Expert Care.</h2>
-                    <p className="text-xl font-medium text-slate-600 leading-relaxed max-w-xl">
+                    <h2 className="text-4xl lg:text-5xl font-black text-brand-primary tracking-tight">Simple Booking. <br/> Expert Care.</h2>
+                    <p className="text-lg font-medium text-slate-600 leading-relaxed max-w-xl">
                        We've partnered with **Healow** to provide a direct, real-time 
                        scheduling experience. Book your physical, televisit, or chronic care 
                        appointment in just a few clicks.
@@ -91,10 +91,10 @@ export function Appointments() {
               <div className="space-y-12 lg:sticky lg:top-32">
                  <div className="p-12 lg:p-16 bg-brand-accent rounded-[64px] border border-brand-accent/50 space-y-12 shadow-sm">
                     <div className="space-y-6">
-                       <div className="w-20 h-20 bg-brand-primary rounded-[32px] flex items-center justify-center text-brand-white shadow-xl">
+                       <div className="w-16 h-16 bg-brand-primary rounded-[32px] flex items-center justify-center text-brand-white shadow-xl">
                           <Smartphone size={40} />
                        </div>
-                       <h3 className="text-4xl font-black text-brand-primary tracking-tight leading-tight">Book on <br/> the Go</h3>
+                       <h3 className="text-3xl font-black text-brand-primary tracking-tight leading-tight">Book on <br/> the Go</h3>
                        <p className="text-lg font-medium text-slate-500 leading-relaxed">
                           Download the **Healow App** on your smartphone for the 
                           fastest booking and medical record access.
@@ -132,7 +132,7 @@ export function Appointments() {
                        <CheckCircle size={32} />
                     </div>
                     <div>
-                       <h4 className="text-xl font-black uppercase tracking-tight leading-none">New Patients Welcome</h4>
+                       <h4 className="text-xl font-black text-white/80 uppercase tracking-tight leading-none">New Patients Welcome</h4>
                        <p className="text-sm font-bold mt-1 text-brand-accent/60 leading-tight">We are currently accepting new residents of Frisco and surrounding areas.</p>
                     </div>
                  </div>

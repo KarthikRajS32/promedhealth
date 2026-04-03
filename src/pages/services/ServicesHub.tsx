@@ -32,7 +32,7 @@ export function ServicesHub() {
                     </div>
                     <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest leading-none">Category</h3>
                   </div>
-                  <h2 className="text-4xl lg:text-7xl font-black text-brand-primary tracking-tight leading-tight">
+                  <h2 className="text-4xl lg:text-5xl font-black text-brand-primary tracking-tight leading-tight">
                     {cat.name}
                   </h2>
                 </div>
@@ -52,7 +52,7 @@ export function ServicesHub() {
       </section>
 
       {/* Expertise Section */}
-      <section className="section-padding bg-brand-primary text-brand-white relative overflow-hidden group">
+      <section className="section-padding bg-brand-primary/90 text-brand-white relative overflow-hidden group">
          <div className="absolute top-0 right-0 p-12 opacity-10 pointer-events-none group-hover:scale-110 transition-transform duration-1000 rotate-12">
             <Heart size={320} />
          </div>
@@ -61,8 +61,8 @@ export function ServicesHub() {
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
                <div className="space-y-10">
                   <div className="h-2 w-20 bg-brand-secondary rounded-full" />
-                  <h2 className="text-5xl lg:text-8xl font-black leading-tight tracking-tight">Our Clinical <br/> Philosophy</h2>
-                  <p className="text-xl font-medium text-brand-accent/80 leading-relaxed">
+                  <h2 className="text-5xl lg:text-5xl font-black text-white/90 leading-tight tracking-tight">Our Clinical <br/> Philosophy</h2>
+                  <p className="text-lg font-medium text-brand-accent/80 leading-relaxed">
                     Lead by Dr. Kavitha Ilayaraja, MD, ProMed Health is 
                     committed to an internal medical practice that combines 
                     evidence-based science with compassionate human connection.
@@ -76,14 +76,14 @@ export function ServicesHub() {
                        { title: "Accessible", desc: "With same-day visits and telemedicine, we are here when you need us." }
                      ].map((item, idx) => (
                         <div key={idx} className="space-y-2">
-                           <h4 className="text-xl font-black tracking-tight">{item.title}</h4>
+                           <h4 className="text-xl font-black text-white/90  tracking-tight">{item.title}</h4>
                            <p className="text-sm font-bold text-brand-accent/60 leading-relaxed">{item.desc}</p>
                         </div>
                      ))}
                   </div>
                </div>
 
-               <div className="p-12 lg:p-20 bg-brand-white rounded-[64px] shadow-2xl relative rotate-2 group-hover:rotate-0 transition-all duration-700">
+               <div className="p-12 lg:p-14 bg-brand-white rounded-[64px] shadow-2xl relative rotate-2 group-hover:rotate-0 transition-all duration-700">
                   <div className="space-y-12">
                      <div className="flex items-center gap-6">
                         <div className="w-20 h-20 bg-brand-accent rounded-[32px] flex items-center justify-center text-brand-secondary">
