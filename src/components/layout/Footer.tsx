@@ -16,10 +16,10 @@ export function Footer() {
             <Link to="/">
               <img src="/images/promed-logo.png" alt="ProMed Health" className="h-14 w-auto brightness-0 invert" />
             </Link>
-            <p className="text-sm text-white/50 leading-relaxed">
+            <p className="text-sm text-white/70 leading-relaxed">
               Patient-centered primary care in Frisco, TX, led by Dr. Kavitha Ilayaraja, MD.
             </p>
-            <div className="space-y-2.5 text-sm text-white/50">
+            <div className="space-y-2.5 text-sm text-white/70">
               <a href={`tel:${clinicInfo.contact.phone}`} className="flex items-center gap-2.5 hover:text-white transition-colors">
                 <Phone size={13} className="text-brand-secondary shrink-0" /> {clinicInfo.contact.phone}
               </a>
@@ -39,7 +39,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-white/40 border-b border-white/10 pb-3">Quick Links</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-white/70 border-b border-white/10 pb-3">Quick Links</h4>
             <ul className="space-y-2.5">
               {[
                 { name: 'Home', path: '/' },
@@ -49,7 +49,7 @@ export function Footer() {
                 { name: 'Contact', path: '/contact' },
               ].map(l => (
                 <li key={l.name}>
-                  <Link to={l.path} className="text-sm text-white/50 hover:text-white transition-colors">{l.name}</Link>
+                  <Link to={l.path} className="text-sm text-white/70 hover:text-white transition-colors">{l.name}</Link>
                 </li>
               ))}
             </ul>
@@ -57,7 +57,7 @@ export function Footer() {
 
           {/* Patient Access */}
           <div className="space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-white/40 border-b border-white/10 pb-3">Patient Access</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-white/70 border-b border-white/10 pb-3">Patient Access</h4>
             <ul className="space-y-2.5">
               {[
                 { name: 'Televisit', path: '/patient-access/televisit', external: false },
@@ -68,9 +68,9 @@ export function Footer() {
               ].map(l => (
                 <li key={l.name}>
                   {l.external ? (
-                    <a href={l.path} target="_blank" rel="noopener noreferrer" className="text-sm text-white/50 hover:text-white transition-colors">{l.name}</a>
+                    <a href={l.path} target="_blank" rel="noopener noreferrer" className="text-sm text-white/70 hover:text-white transition-colors">{l.name}</a>
                   ) : (
-                    <Link to={l.path} className="text-sm text-white/50 hover:text-white transition-colors">{l.name}</Link>
+                    <Link to={l.path} className="text-sm text-white/70 hover:text-white transition-colors">{l.name}</Link>
                   )}
                 </li>
               ))}
@@ -79,11 +79,11 @@ export function Footer() {
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-white/40 border-b border-white/10 pb-3">Services</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-white/70 border-b border-white/10 pb-3">Services</h4>
             <ul className="space-y-2.5">
               {services.slice(0, 6).map(s => (
                 <li key={s.id}>
-                  <Link to={`/services/${s.id}`} className="text-sm text-white/50 hover:text-white transition-colors">{s.title}</Link>
+                  <Link to={`/services/${s.id}`} className="text-sm text-white/70 hover:text-white transition-colors">{s.title}</Link>
                 </li>
               ))}
             </ul>

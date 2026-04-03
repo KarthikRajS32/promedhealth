@@ -296,7 +296,7 @@ export function Home() {
       </section>
 
       {/* ── CTA: full-width dark band ── */}
-      <section className="bg-brand-primary py-16">
+      <section className="bg-brand-primary/90 py-16">
         <motion.div 
           {...fadeUp}
           className="container-custom flex flex-col lg:flex-row items-center justify-between gap-8"

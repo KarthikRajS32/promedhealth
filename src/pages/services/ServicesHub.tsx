@@ -108,7 +108,7 @@ export function ServicesHub() {
       </section>
 
       {/* CTA */}
-      <section className="bg-brand-primary py-14">
+      <section className="bg-brand-primary/90 py-14">
         <motion.div 
           {...fadeUp}
           className="container-custom flex flex-col lg:flex-row items-center justify-between gap-6"
